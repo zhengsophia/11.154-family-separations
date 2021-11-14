@@ -1,0 +1,115 @@
+p {
+  font-family: 'Open Sans', sans-serif;
+  color: #eeeeee;
+  font-weight: 300;
+}
+
+.subheading {
+  color: #bdbdbd;
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+svg {
+  width: 100%;
+  height: 600px;
+  padding-left: 5%;
+  padding-right: 50px;
+}
+
+h1 {
+  font-size: 90px;
+  font-weight: 300;
+  line-height: 1.3;
+  text-align: left;
+  color: #eeeeee;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+h2 {
+  font-size: 40px;
+  color: #ff8080;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+h3 {
+  font-size: 30px;
+  color: #ffbfbf;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.3;
+  text-align: left;
+  color: #eeeeee;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+  font-size: 18px;
+  background-color: #161616;
+}
+
+hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 100%;
+  background-color: #eeeeee;
+  height: 1px;
+}
+
+.sticky-scroll-text {
+  position: -webkit-sticky;
+  position: sticky;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.8s;
+  -webkit-transition: opacity 0.8s;
+}
+
+.stick-to-top {
+  top: 10%;
+}
+
+.stick-to-center {
+  top: 40%;
+}
+
+.scrolly-image {
+  max-width: 100%;
+  max-height: 100%;
+  filter: grayscale(100%);
+  opacity: 0;
+  transition: opacity 1.2s;
+  -webkit-transition: opacity 1.2s;
+}
+
+.scrolly-text {
+  max-width: 100%;
+  max-height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s;
+  -webkit-transition: opacity 1.2s;
+}
+
+.active {
+  opacity: 1;
+}
+
+.deactive {
+  opacity: 0;
+}
+
+/* Spacers are 100% viewport height, can be used as SM triggers*/
+.spacer {
+  min-height: 100vh;
+}
+
+/* Removes the border from the iframe */
+iframe {
+  position: absolute;
+  border-color: transparent;
+}
