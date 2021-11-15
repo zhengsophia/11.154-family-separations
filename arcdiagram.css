@@ -1,0 +1,39 @@
+body {
+  background-color: #161616;
+}
+
+.curve,
+.line {
+  fill: none;
+  stroke-width: 4px;
+}
+
+.curve {
+  stroke: red;
+}
+
+#tooltip {
+  position: absolute;
+  padding: 5px;
+  background: white;
+  border: solid gray 1px;
+  z-index: 1;
+  box-shadow: 0px 0px 5px #000000b6;
+  font-weight: 500;
+  border-radius: 5pt;
+}
+
+.x-axis,
+.y-axis {
+  stroke: #d4d4d4;
+  color: #d4d4d4;
+  font-size: 14px;
+}
+
+.y-axis .tick line {
+  display: none;
+}
+
+#tooltip.hidden {
+  display: none;
+}
