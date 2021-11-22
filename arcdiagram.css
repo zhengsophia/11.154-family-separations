@@ -14,9 +14,11 @@ body {
 
 #tooltip {
   position: absolute;
+  width: 300px;
   padding: 5px;
-  background: white;
-  border: solid gray 1px;
+  color: #f1f1f1;
+  font-family: 'Open Sans', sans-serif;
+  background: rgb(0, 0, 0);
   z-index: 1;
   box-shadow: 0px 0px 5px #000000b6;
   font-weight: 500;
