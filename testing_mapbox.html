@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <title>Points on a map</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body { 
+        margin: 0; 
+        padding: 0; 
+      }
+      #map { 
+        position: absolute; 
+        top: 0; 
+        bottom: 0; 
+        width: 100%; 
+      }
+    </style>
+  </head>
+  <body>
+
+
+
+
+    
+    <div id='map'></div>
+
+    <script>
+        
+    // The value for 'accessToken' begins with 'pk...'
+    mapboxgl.accessToken = 'pk.eyJ1IjoiMTU0LWZhbWlseS1zZXBhcmF0aW9ucyIsImEiOiJja3c4MGhobjJjbW9jMm5xMXNyd21xNXI5In0.hkF5HVL6mdh7v0M0eKaYPg'; 
+    const map = new mapboxgl.Map({
+      container: 'map',
+      // Replace YOUR_STYLE_URL with your style URL.
+      style: 'mapbox://styles/154-family-separations/ckwi5bo531iq315phfptofo29', 
+      center: [-95.7129, 37.0902],
+      //center: [-96, 37.8],
+      zoom: 3
+    });
+
+    let hoveredState = null;
+
+
+    // var sidebar = L.control.sidebar('sidebar', {
+    // position: 'right'
+    // });
+
+
+    
+
+    map.on('mouseover', 'facilities', () => {
+    console.log('A mouseover event has occurred on a visible portion of the facilities layer.');
+    });
+
+
+    map.on('click', (event) => {
+        const features = map.queryRenderedFeatures(event.point, {
+        layers: ['facilities']
+        });
+        if (!features.length) {
+        return;
+        }
+        const feature = features[0];
+
+        map.flyTo({
+        center: feature.geometry.coordinates,
+        offset: [-200, 0],
+        zoom: 9,
+        speed: 0.75,
+        curve: 1.5,
+        });
+        
+        const popup = new mapboxgl.Popup({
+        offset: [0, -15],
+        //closeOnClick: true,
+        })
+        .setLngLat(feature.geometry.coordinates)
+        .setHTML(
+        `<h3>${feature.properties.FACILITY_APPROVED}</h3><p>${feature.properties.text}</p>`
+        )
+        .addTo(map);
+    });
+
+
+
+
+
+    </script>
+  </body>
+</html>
