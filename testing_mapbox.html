@@ -64,7 +64,7 @@
     const map = new mapboxgl.Map({
       container: 'map',
       // Replace YOUR_STYLE_URL with your style URL.
-      style: 'mapbox://styles/154-family-separations/ckwi5bo531iq315phfptofo29', 
+      style: 'mapbox://styles/154-family-separations/ckwa9vc0m5o4y14o3sodg0oaw', 
       center: [-85.7129, 37.0902],
       //center: [-96, 37.8],
       zoom: 3.5
@@ -87,6 +87,8 @@
         }
         const feature = features[0];
 
+        console.log(feature)
+
         map.flyTo({
         center: feature.geometry.coordinates,
         offset: [-200, 0],
@@ -101,7 +103,7 @@
         })
         .setLngLat(feature.geometry.coordinates)
         .setHTML(
-        `<h3>${feature.properties.FACILITY_APPROVED}</h3><p>${feature.properties.text}</p>`
+        `<h3>${feature.properties.FACILITY_APPROVED}</h3><p>${feature.properties.count}</p>`
         )
         .addTo(map);
     });
@@ -114,8 +116,8 @@
 
             if (features.length) {
                 //show name and value in sidebar
-                document.getElementById('tooltip-name').innerHTML = "Facility: " + features[0].properties.FACILITY_APPROVED;
-                document.getElementById('tooltip').innerHTML = Math.round(features[0].properties.TOTPOPCHG);
+                document.getElementById('tooltip-name').innerHTML = features[0].properties.FACILITY_APPROVED;
+                document.getElementById('tooltip').innerHTML = features[0].properties.count;
                 //for troubleshooting - show complete features info
                 //document.getElementById('tooltip').innerHTML = JSON.stringify(features, null, 2);
             } else {
@@ -126,6 +128,12 @@
         });
 
 
+
+
+
+    </script>
+  </body>
+</html>
 
 
 
