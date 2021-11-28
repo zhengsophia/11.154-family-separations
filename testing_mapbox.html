@@ -17,6 +17,28 @@
         bottom: 0; 
         width: 100%; 
       }
+
+
+      #sidebar {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            bottom: 15px;
+            width: 350px;
+            overflow: auto;
+            background: rgba(255, 255, 255, 0.8);
+            font-family: "Arial";
+            padding-left: 10px;
+        }
+    
+    #tooltip-name {
+            font-size: 50px;
+
+
+    }
+
+
+
     </style>
   </head>
   <body>
@@ -27,6 +49,14 @@
     
     <div id='map'></div>
 
+
+    <div id='sidebar'>
+        <!-- <h1>Choropleth example using Mapbox GL js</h1>
+        <h2>Population change, 1990-2000</h2> -->
+        <div id="tooltip-name"></div>
+        <div id='tooltip'></div>
+    </div>
+
     <script>
         
     // The value for 'accessToken' begins with 'pk...'
@@ -35,17 +65,10 @@
       container: 'map',
       // Replace YOUR_STYLE_URL with your style URL.
       style: 'mapbox://styles/154-family-separations/ckwi5bo531iq315phfptofo29', 
-      center: [-95.7129, 37.0902],
+      center: [-85.7129, 37.0902],
       //center: [-96, 37.8],
-      zoom: 3
+      zoom: 3.5
     });
-
-    let hoveredState = null;
-
-
-    // var sidebar = L.control.sidebar('sidebar', {
-    // position: 'right'
-    // });
 
 
     
@@ -82,6 +105,25 @@
         )
         .addTo(map);
     });
+
+
+    map.on("click", function (e) {
+            var features = map.queryRenderedFeatures(e.point, {
+                layers: ["facilities"]
+            });
+
+            if (features.length) {
+                //show name and value in sidebar
+                document.getElementById('tooltip-name').innerHTML = "Facility: " + features[0].properties.FACILITY_APPROVED;
+                document.getElementById('tooltip').innerHTML = Math.round(features[0].properties.TOTPOPCHG);
+                //for troubleshooting - show complete features info
+                //document.getElementById('tooltip').innerHTML = JSON.stringify(features, null, 2);
+            } else {
+                //if not hovering over a feature set tooltip to empty
+                document.getElementById('tooltip-name').innerHTML = "";
+                document.getElementById('tooltip').innerHTML = "";
+            }
+        });
 
 
 
