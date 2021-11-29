@@ -51,19 +51,38 @@ map.on('click', function (e) {
     layers: ['facilities'],
   });
 
-  if (features.length) {
-    //show name and value in sidebar
-    document.getElementById('tooltip-name').innerHTML =
-      features[0].properties.FACILITY_APPROVED;
-    document.getElementById('tooltip').innerHTML = features[0].properties.count;
-    //for troubleshooting - show complete features info
-    //document.getElementById('tooltip').innerHTML = JSON.stringify(features, null, 2);
-  } else {
-    //if not hovering over a feature set tooltip to empty
-    document.getElementById('tooltip-name').innerHTML = '';
-    document.getElementById('tooltip').innerHTML = '';
-  }
-});
+map.on("click", function (e) {
+        var features = map.queryRenderedFeatures(e.point, {
+            layers: ["facilities"]
+        });
+
+        if (features.length) {
+            //show name and value in sidebar
+            document.getElementById('tooltip-name').innerHTML = `Facility: ${features[0].properties.FACILITY_APPROVED}`;
+            document.getElementById('tooltip').innerHTML = `Number of children held: ${features[0].properties.count}`;
+            //for troubleshooting - show complete features info
+            //document.getElementById('tooltip').innerHTML = JSON.stringify(features, null, 2);
+        } else {
+            //if not hovering over a feature set tooltip to empty
+            document.getElementById('tooltip-name').innerHTML = "";
+            document.getElementById('tooltip').innerHTML = "";
+        }
+    });
+
+    if (features.length) {
+      //show name and value in sidebar
+      document.getElementById('tooltip-name').innerHTML =
+        features[0].properties.FACILITY_APPROVED;
+      document.getElementById('tooltip').innerHTML = features[0].properties.count;
+      //for troubleshooting - show complete features info
+      //document.getElementById('tooltip').innerHTML = JSON.stringify(features, null, 2);
+    } else {
+      //if not hovering over a feature set tooltip to empty
+      document.getElementById('tooltip-name').innerHTML = '';
+      document.getElementById('tooltip').innerHTML = '';
+    }
+  });
+    
 
 map.scrollZoom.disable();
 
