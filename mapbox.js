@@ -97,7 +97,7 @@ const drawArcDiagram = (data) => {
 
   // Create the SVG viewbox
   const svg = d3
-    .select('#viz')
+    .select('#arc-diagram')
     .append('svg')
     .attr('viewBox', [
       0,
@@ -127,7 +127,7 @@ const drawArcDiagram = (data) => {
     .attr('id', 'summary-text-total-days')
     .attr('font-size', '32px')
     .attr('fill', '#eeeeee')
-    .attr('x', width - marginRight)
+    .attr('x', width - marginRight - 15)
     .attr('y', marginTop)
     .text(0);
 
@@ -136,7 +136,7 @@ const drawArcDiagram = (data) => {
     .append('text')
     .attr('font-size', '28px')
     .attr('fill', '#aaaaaa')
-    .attr('x', width - marginRight)
+    .attr('x', width - marginRight - 15)
     .attr('y', marginTop + 30)
     .text('total days');
 
@@ -146,7 +146,7 @@ const drawArcDiagram = (data) => {
     .attr('id', 'summary-text-total-children')
     .attr('font-size', '32px')
     .attr('fill', '#eeeeee')
-    .attr('x', width - marginRight)
+    .attr('x', width - marginRight - 15)
     .attr('y', marginTop + 80)
     .text(0);
 
@@ -155,7 +155,7 @@ const drawArcDiagram = (data) => {
     .append('text')
     .attr('font-size', '28px')
     .attr('fill', '#aaaaaa')
-    .attr('x', width - marginRight)
+    .attr('x', width - marginRight - 15)
     .attr('y', marginTop + 110)
     .text('children separated');
 
@@ -320,7 +320,8 @@ const drawArcDiagram = (data) => {
       // Display the tooltip on hover
       arc
         .on('mouseover', function (event, d) {
-          d3.select('#tooltip')
+          console.log(event);
+          d3.select('#arc-tooltip')
             .style('left', event.pageX + 15 + 'px')
             .style('top', event.pageY + 'px')
 
@@ -342,12 +343,12 @@ const drawArcDiagram = (data) => {
             );
         })
         .on('mousemove', (event) => {
-          d3.select('#tooltip')
+          d3.select('#arc-tooltip')
             .style('left', event.pageX + 15 + 'px')
             .style('top', event.pageY + 'px');
         })
         .on('mouseout', function () {
-          d3.select('#tooltip').classed('hidden', true);
+          d3.select('#arc-tooltip').classed('hidden', true);
           d3.select(this)
             .attr('stroke-width', pathStroke)
             .style('filter', 'none');
@@ -397,6 +398,43 @@ map.on('mouseover', 'facilities', () => {
   );
 });
 
+const displaySidebar = (facilityProps) => {
+  const map = document.getElementById('map');
+  let sidebar = document.getElementById('sidebar');
+  if (!sidebar) {
+    sidebar = document.createElement('div');
+    map.appendChild(sidebar);
+  }
+  sidebar.id = 'sidebar';
+  sidebar.innerHTML = `
+    <div class="container">
+      
+      <div class="row">
+        <h2>${facilityProps.FACILITY_APPROVED}</h2>    
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-6 text-center">
+          <h3>Average duration of separation</h3>
+          <h1 class="text-center">## DAYS</h1>
+        </div>
+        <div class="col-6 text-center">
+          <h3>Reunification rate</h3>
+          <h1 class="text-center">##%</h1>
+        </div>
+      </div>
+      <div id="arc-diagram">
+      </div>
+      <button id="close-sidebar">Close</button>
+    </div>`;
+
+  loadAndDraw(facilityProps.FACILITY_APPROVED);
+  const closeButton = document.getElementById('close-sidebar');
+  closeButton.onclick = () => {
+    map.removeChild(sidebar);
+  };
+};
+
 map.on('click', 'facilities', function (e) {
   var features = map.queryRenderedFeatures(e.point, {
     layers: ['facilities'],
@@ -426,37 +464,15 @@ map.on('click', 'facilities', function (e) {
 
   if (features.length) {
     //show name and value in sidebar
-    document.getElementById(
-      'tooltip-container'
-    ).innerHTML = `   <div class="container">
-    <div class="row">
-        <h2>${facilityProps.FACILITY_APPROVED}</h2>
-        
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6 text-center">
-        <h3>Average duration of separation</h3>
-        <h1 class="text-center">## DAYS</h1>
-      </div>
-      <div class="col-6 text-center">
-        <h3>Reunification rate</h3>
-        <h1 class="text-center">##%</h1>
-      </div>
-    </div>
-    <link rel="stylesheet" href="arcdiagram.css" />
-    <div id="viz">
-      <div id="tooltip" class="hidden">
-        <span id="value"></span>
-      </div>
-    </div>
-  </div>`;
 
-    loadAndDraw(facilityProps.FACILITY_APPROVED);
-    document.getElementById('tooltip-container');
+    d3.csv('updated_dataset.csv', d3.autoType).then((data) => {
+      data = data.filter((row) => row.Duration !== 'no discharge');
+      displaySidebar(facilityProps);
+    });
   } else {
     //if not hovering over a feature set tooltip to empty
-    document.getElementById('tooltip-container').innerHTML = '';
+    const map = document.getElementById('map');
+    map.removeChild(document.getElementById('sidebar'));
   }
 });
 
