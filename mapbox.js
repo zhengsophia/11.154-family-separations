@@ -242,7 +242,7 @@ const drawArcDiagram = (data) => {
     pathStep = 1,
     pathStroke = 2,
     pathHoverStroke = 3,
-    pathAnimationDuration = 1000,
+    pathAnimationDuration = 500,
     pathAnimationDelay = (i) => 100 + i * 50; // Stagger the arc animations
 
   // Draw the actual arcs
@@ -313,6 +313,8 @@ const drawArcDiagram = (data) => {
             d3.select('#summary-text-total-days').text().replace(/,/g, '')
           );
           const newTotalDays = currentTotalDays + migrantData.Duration;
+          // TODO: Make sure this stops counting if a new facility has been selected
+
           d3.select('#summary-text-total-days').text(commaFormat(newTotalDays));
           d3.select('#summary-text-total-children').text(commaFormat(i + 1));
         });
@@ -398,7 +400,9 @@ map.on('mouseover', 'facilities', () => {
   );
 });
 
-const displaySidebar = (facilityProps) => {
+const displaySidebar = (facilityProps, summaryData) => {
+  console.log(summaryData);
+
   const map = document.getElementById('map');
   let sidebar = document.getElementById('sidebar');
   if (!sidebar) {
@@ -416,11 +420,13 @@ const displaySidebar = (facilityProps) => {
       <div class="row">
         <div class="col-6 text-center">
           <h3>Average duration of separation</h3>
-          <h1 class="text-center">## DAYS</h1>
+          <h1 class="text-center">${Math.round(summaryData.Duration)} DAYS</h1>
         </div>
         <div class="col-6 text-center">
           <h3>Reunification rate</h3>
-          <h1 class="text-center">##%</h1>
+          <h1 class="text-center">${Math.round(
+            summaryData.discharge_rate * 100
+          )}%</h1>
         </div>
       </div>
       <div id="arc-diagram">
@@ -465,9 +471,11 @@ map.on('click', 'facilities', function (e) {
   if (features.length) {
     //show name and value in sidebar
 
-    d3.csv('updated_dataset.csv', d3.autoType).then((data) => {
-      data = data.filter((row) => row.Duration !== 'no discharge');
-      displaySidebar(facilityProps);
+    d3.csv('facility_stats.csv', d3.autoType).then((data) => {
+      summary_data = data.find(
+        (row) => row.FACILITY_APPROVED === facilityProps.FACILITY_APPROVED
+      );
+      displaySidebar(facilityProps, summary_data);
     });
   } else {
     //if not hovering over a feature set tooltip to empty

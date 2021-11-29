@@ -195,3 +195,20 @@ hr {
 #arc-tooltip.hidden {
   display: none;
 }
+
+/* Customize scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 12pt;
+  height: 12pt;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 6pt;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(53, 53, 53);
+  border-radius: 6pt;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(63, 63, 63);
+}
