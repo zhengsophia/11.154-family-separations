@@ -119,16 +119,15 @@ hr {
 }
 
 #sidebar {
-  position: relative;
-  top: -760px;
-  left: 1100px;
-  bottom: 15px;
-  width: 350px;
-  height: 741px;
+  position: absolute;
+  width: 40%;
+  height: 100vh;
+  right: 0;
   overflow: auto;
-  background: rgba(255, 255, 255, 0.8);
-  font-family: "Arial";
-  padding-left: 10px;
+  background: rgba(22, 22, 22, 0.8);
+  font-family: 'Arial';
+  padding: 10px;
+  z-index: 1;
 }
 
 #tooltip-name {
@@ -143,4 +142,3 @@ hr {
   height: 100vh;
   border: none;
 }
-
