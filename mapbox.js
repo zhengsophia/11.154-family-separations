@@ -65,5 +65,12 @@ map.on("click", function (e) {
             document.getElementById('tooltip').innerHTML = "";
         }
     });
-    
+
 map.scrollZoom.disable();
+
+var nav = new mapboxgl.NavigationControl({
+    showCompass: false,
+    showZoom: true
+  });
+
+map.addControl(nav, "top-left");
