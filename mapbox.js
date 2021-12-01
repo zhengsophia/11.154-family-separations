@@ -439,11 +439,11 @@ const displaySidebar = (facilityProps, summaryData) => {
   closeButton.onclick = () => {
     map.removeChild(sidebar);
     map.flyTo({
-      latlng: [-285.7129, 37.0902],
-      // offset: [-200, 0],
+      center: [-85.7129, 37.0902],
+      offset: [-200, 0],
       zoom: 3.5,
-      // speed: 0.75,
-      // curve: 1.5
+      speed: 0.75,
+      curve: 1.5
     })
   };
 };
