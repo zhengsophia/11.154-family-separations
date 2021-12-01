@@ -437,6 +437,7 @@ const displaySidebar = (facilityProps, summaryData) => {
   loadAndDraw(facilityProps.FACILITY_APPROVED);
   const closeButton = document.getElementById('close-sidebar');
   closeButton.onclick = () => {
+    map.removeChild(sidebar);
     map.flyTo({
       center: [-85.7129, 37.0902],
       offset: [-200, 0],
@@ -444,7 +445,6 @@ const displaySidebar = (facilityProps, summaryData) => {
       speed: 0.75,
       curve: 1.5
     })
-    map.removeChild(sidebar);
   };
 };
 
