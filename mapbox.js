@@ -437,6 +437,13 @@ const displaySidebar = (facilityProps, summaryData) => {
   loadAndDraw(facilityProps.FACILITY_APPROVED);
   const closeButton = document.getElementById('close-sidebar');
   closeButton.onclick = () => {
+    map.flyTo({
+      center: [-85.7129, 37.0902],
+      offset: [-200, 0],
+      zoom: 3.5,
+      speed: 0.75,
+      curve: 1.5
+    })
     map.removeChild(sidebar);
   };
 };
@@ -456,15 +463,15 @@ map.on('click', 'facilities', function (e) {
     curve: 1.5,
   });
 
-  // const popup = new mapboxgl.Popup({
-  //   offset: [0, -15],
-  //   //closeOnClick: true,
-  // })
-  //   .setLngLat(feature.geometry.coordinates)
-  //   .setHTML(
-  //     `<h3>${feature.properties.FACILITY_APPROVED}</h3><p>${feature.properties.count}</p>`
-  //   )
-  //   .addTo(map);
+  const popup = new mapboxgl.Popup({
+    offset: [0, -15],
+    //closeOnClick: true,
+  })
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML(
+      `<h3>${feature.properties.FACILITY_APPROVED}</h3><p>${feature.properties.count}</p>`
+    )
+    .addTo(map);
 
   const facilityProps = feature.properties;
 
