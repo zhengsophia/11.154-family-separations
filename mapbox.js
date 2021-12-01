@@ -456,15 +456,15 @@ map.on('click', 'facilities', function (e) {
     curve: 1.5,
   });
 
-  const popup = new mapboxgl.Popup({
-    offset: [0, -15],
-    //closeOnClick: true,
-  })
-    .setLngLat(feature.geometry.coordinates)
-    .setHTML(
-      `<h3>${feature.properties.FACILITY_APPROVED}</h3><p>${feature.properties.count}</p>`
-    )
-    .addTo(map);
+  // const popup = new mapboxgl.Popup({
+  //   offset: [0, -15],
+  //   //closeOnClick: true,
+  // })
+  //   .setLngLat(feature.geometry.coordinates)
+  //   .setHTML(
+  //     `<h3>${feature.properties.FACILITY_APPROVED}</h3><p>${feature.properties.count}</p>`
+  //   )
+  //   .addTo(map);
 
   const facilityProps = feature.properties;
 
