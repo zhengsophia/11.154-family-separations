@@ -12,6 +12,10 @@ const commaFormat = d3.format(',');
 const ztpStart = new Date(2018, 4, 7);
 const ztpEnd = new Date(2018, 5, 20);
 
+const dashify = (s) => {
+  return s.toLowerCase().trim().split(/\s+/).join('-');
+};
+
 /**
  * Generates an array of points based on `y = ax^2 + bx + c`.
  *
@@ -95,6 +99,10 @@ const resolveDateToCategory = (date) => {
 const drawArcDiagram = (data) => {
   console.log(data);
 
+  const facilityId = dashify(data[0].FACILITY_APPROVED);
+  const summaryTextTotalDaysId = `summary-text-total-days-${facilityId}`;
+  const summaryTextTotalChildrenId = `summary-text-total-children-${facilityId}`;
+
   // Create the SVG viewbox
   const svg = d3
     .select('#arc-diagram')
@@ -124,7 +132,7 @@ const drawArcDiagram = (data) => {
   // Total days value
   summaryText
     .append('text')
-    .attr('id', 'summary-text-total-days')
+    .attr('id', summaryTextTotalDaysId)
     .attr('font-size', '32px')
     .attr('fill', '#eeeeee')
     .attr('x', width - marginRight - 15)
@@ -143,7 +151,7 @@ const drawArcDiagram = (data) => {
   // Total children value
   summaryText
     .append('text')
-    .attr('id', 'summary-text-total-children')
+    .attr('id', summaryTextTotalChildrenId)
     .attr('font-size', '32px')
     .attr('fill', '#eeeeee')
     .attr('x', width - marginRight - 15)
@@ -309,14 +317,22 @@ const drawArcDiagram = (data) => {
             .ease(d3.easeLinear)
             .style('opacity', 1);
           // When the arc animation ends, update the counters
-          const currentTotalDays = parseInt(
-            d3.select('#summary-text-total-days').text().replace(/,/g, '')
-          );
-          const newTotalDays = currentTotalDays + migrantData.Duration;
-          // TODO: Make sure this stops counting if a new facility has been selected
-
-          d3.select('#summary-text-total-days').text(commaFormat(newTotalDays));
-          d3.select('#summary-text-total-children').text(commaFormat(i + 1));
+          try {
+            const currentTotalDays = parseInt(
+              d3.select(`#${summaryTextTotalDaysId}`).text().replace(/,/g, '')
+            );
+            const newTotalDays = currentTotalDays + migrantData.Duration;
+            d3.select(`#${summaryTextTotalDaysId}`).text(
+              commaFormat(newTotalDays)
+            );
+            d3.select(`#${summaryTextTotalChildrenId}`).text(
+              commaFormat(i + 1)
+            );
+          } catch (error) {
+            // Don't do anything if that modal is gone
+            console.log('Returning, caused by another modal being opened');
+            return;
+          }
         });
 
       // Display the tooltip on hover
@@ -443,8 +459,8 @@ const displaySidebar = (facilityProps, summaryData) => {
       offset: [-200, 0],
       zoom: 3.5,
       speed: 0.75,
-      curve: 1.5
-    })
+      curve: 1.5,
+    });
   };
 };
 
