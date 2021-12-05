@@ -4,20 +4,6 @@ p {
   font-weight: 300;
 }
 
-/* button {
-  font-family: 'Open Sans', sans-serif;
-  color: #eeeeee;
-  background-color: #363636;
-  font-size: larger;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
-} */
-
-/* button:hover {
-  background-color: #686868;
-} */
-
 .subheading {
   color: #bdbdbd;
   font-size: 3rem;
@@ -136,6 +122,10 @@ hr {
   font-size: 30px;
 }
 
+/* ------------------- */
+/* ARC DIAGRAM STYLING */
+/* ------------------- */
+
 #arc {
   position: relative;
   bottom: 0;
@@ -183,24 +173,9 @@ hr {
   display: none;
 }
 
-/* Customize scrollbar for dark theme */
-::-webkit-scrollbar {
-  width: 12pt;
-  height: 12pt;
-}
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 6pt;
-}
-::-webkit-scrollbar-thumb {
-  background: rgb(53, 53, 53);
-  border-radius: 6pt;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(63, 63, 63);
-}
-
-/* SIDEBAR */
+/* --------------- */
+/* SIDEBAR STYLING */
+/* --------------- */
 
 #sidebar {
   position: absolute;
@@ -269,4 +244,25 @@ hr {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+/* --------------------- */
+/* MISCELLANEOUS STYLING */
+/* --------------------- */
+
+/* Customize scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 12pt;
+  height: 12pt;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 6pt;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(53, 53, 53);
+  border-radius: 6pt;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(63, 63, 63);
 }

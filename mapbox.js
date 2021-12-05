@@ -12,9 +12,19 @@ const commaFormat = d3.format(',');
 const ztpStart = new Date(2018, 4, 7);
 const ztpEnd = new Date(2018, 5, 20);
 
+/**
+ * Adds dashes between words in a string.
+ *
+ * @param {string} s - The target string
+ * @returns {string} The dashified string
+ */
 const dashify = (s) => {
   return s.toLowerCase().trim().split(/\s+/).join('-');
 };
+
+// -----------------
+// ARC DIAGRAM STUFF
+// -----------------
 
 /**
  * Generates an array of points based on `y = ax^2 + bx + c`.
@@ -386,6 +396,11 @@ const drawArcDiagram = (data) => {
     });
 };
 
+/**
+ * Loads and draws the arc diagram content for this facility
+ *
+ * @param {string} facility - The name of the facility
+ */
 const loadAndDraw = (facility) => {
   // Load data from CSV and show the bar chart
   d3.csv('updated_dataset.csv', d3.autoType).then((data) => {
@@ -397,6 +412,10 @@ const loadAndDraw = (facility) => {
     );
   });
 };
+
+// ------------
+// MAPBOX STUFF
+// ------------
 
 // The value for 'accessToken' begins with 'pk...'
 mapboxgl.accessToken =
@@ -416,9 +435,17 @@ map.on('mouseover', 'facilities', () => {
   );
 });
 
+/**
+ * Displays the sidebar and its content when a bubble is clicked on the map.
+ *
+ * @param {object} facilityProps - The facility properties as passed in from the
+ *  mapbox layer
+ * @param {object} summaryData - The summary data as passed in from Lukas' CSV
+ */
 const displaySidebar = (facilityProps, summaryData) => {
   console.log(summaryData);
 
+  // Gets the map element and appends the sidebar content to it
   const mapElement = document.getElementById('map');
   let sidebar = document.getElementById('sidebar');
   if (!sidebar) {
@@ -451,6 +478,8 @@ const displaySidebar = (facilityProps, summaryData) => {
     </div>`;
 
   loadAndDraw(facilityProps.FACILITY_APPROVED);
+
+  // Handles closing the sidebar
   const closeButton = document.getElementById('close-sidebar');
   closeButton.onclick = () => {
     mapElement.removeChild(sidebar);
@@ -464,6 +493,7 @@ const displaySidebar = (facilityProps, summaryData) => {
   };
 };
 
+// Actual trigger for loading the sidebar
 map.on('click', 'facilities', function (e) {
   var features = map.queryRenderedFeatures(e.point, {
     layers: ['facilities'],
