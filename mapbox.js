@@ -419,18 +419,18 @@ map.on('mouseover', 'facilities', () => {
 const displaySidebar = (facilityProps, summaryData) => {
   console.log(summaryData);
 
-  const map = document.getElementById('map');
+  const mapElement = document.getElementById('map');
   let sidebar = document.getElementById('sidebar');
   if (!sidebar) {
     sidebar = document.createElement('div');
-    map.appendChild(sidebar);
+    mapElement.appendChild(sidebar);
   }
   sidebar.id = 'sidebar';
   sidebar.innerHTML = `
     <div class="container">
-      
-      <div class="row">
-        <h2>${facilityProps.FACILITY_APPROVED}</h2>    
+      <div class="sidebar-header">
+        <h2>${facilityProps.FACILITY_APPROVED}</h2>
+        <button id="close-sidebar" type="button" class="btn-close btn-close-white btn-lg" aria-label="Close"></button>    
       </div>
       </div>
       <div class="row">
@@ -447,13 +447,13 @@ const displaySidebar = (facilityProps, summaryData) => {
       </div>
       <div id="arc-diagram">
       </div>
-      <button id="close-sidebar">Close</button>
+      
     </div>`;
 
   loadAndDraw(facilityProps.FACILITY_APPROVED);
   const closeButton = document.getElementById('close-sidebar');
   closeButton.onclick = () => {
-    map.removeChild(sidebar);
+    mapElement.removeChild(sidebar);
     map.flyTo({
       center: [-85.7129, 37.0902],
       offset: [-200, 0],
@@ -473,7 +473,7 @@ map.on('click', 'facilities', function (e) {
 
   map.flyTo({
     center: feature.geometry.coordinates,
-    offset: [-200, 0],
+    offset: [-400, 0],
     zoom: 9,
     speed: 0.75,
     curve: 1.5,

@@ -4,7 +4,7 @@ p {
   font-weight: 300;
 }
 
-button {
+/* button {
   font-family: 'Open Sans', sans-serif;
   color: #eeeeee;
   background-color: #363636;
@@ -12,11 +12,11 @@ button {
   border: none;
   cursor: pointer;
   border-radius: 10px;
-}
+} */
 
-button:hover {
+/* button:hover {
   background-color: #686868;
-}
+} */
 
 .subheading {
   color: #bdbdbd;
@@ -132,19 +132,6 @@ hr {
   border: none;
 }
 
-#sidebar {
-  position: absolute;
-  width: 45%;
-  height: 100vh;
-  right: 0;
-  overflow: auto;
-  background: rgba(22, 22, 22, 0.8);
-  font-family: 'Arial';
-  padding: 10px;
-  z-index: 1;
-  overflow-x: hidden;
-}
-
 #tooltip-name {
   font-size: 30px;
 }
@@ -211,4 +198,75 @@ hr {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(63, 63, 63);
+}
+
+/* SIDEBAR */
+
+#sidebar {
+  position: absolute;
+  width: 60%;
+  height: 100vh;
+  right: 0;
+  overflow: auto;
+  background: rgba(22, 22, 22, 0.8);
+  font-family: 'Arial';
+  padding: 10px;
+  z-index: 1;
+  overflow-x: hidden;
+  animation-name: FadeIn;
+  animation-duration: 1s;
+  transition-timing-function: linear;
+}
+
+@keyframes FadeIn {
+  0% {
+    opacity: 0;
+    right: -1000pt;
+  }
+  100% {
+    opacity: 1;
+    right: 0pt;
+  }
+}
+
+@-moz-keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
