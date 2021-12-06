@@ -55,8 +55,7 @@ new ScrollMagic.Scene({ triggerElement: '#map', triggerHook: 'onEnter' })
   .addTo(controller);
 
 const position0 = {
-  center: [-85.7129, 37.0902],
-  offset: [-200, 0],
+  center: [-95.7129, 36.0902],
   zoom: 3.5,
   speed: 0.75,
   curve: 1.5,
