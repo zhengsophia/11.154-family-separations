@@ -368,7 +368,7 @@ const drawArcDiagram = (data) => {
 };
 
 // Load data from CSV and show the bar chart
-d3.csv('updated_dataset.csv', d3.autoType).then((data) => {
+d3.csv('arc_data.csv', d3.autoType).then((data) => {
   data = data.filter((row) => row.Duration !== 'no discharge');
 
   const tempFacility = 'BCFS Raymondville';

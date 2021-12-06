@@ -403,7 +403,7 @@ const drawArcDiagram = (data) => {
  */
 const loadAndDraw = (facility) => {
   // Load data from CSV and show the bar chart
-  d3.csv('updated_dataset.csv', d3.autoType).then((data) => {
+  d3.csv('arc_data.csv', d3.autoType).then((data) => {
     data = data.filter((row) => row.Duration !== 'no discharge');
 
     const tempFacility = facility;
@@ -420,13 +420,42 @@ const loadAndDraw = (facility) => {
 // The value for 'accessToken' begins with 'pk...'
 mapboxgl.accessToken =
   'pk.eyJ1IjoiMTU0LWZhbWlseS1zZXBhcmF0aW9ucyIsImEiOiJja3c4MGhobjJjbW9jMm5xMXNyd21xNXI5In0.hkF5HVL6mdh7v0M0eKaYPg';
+
 const map = new mapboxgl.Map({
   container: 'map',
   // Replace YOUR_STYLE_URL with your style URL.
-  style: 'mapbox://styles/154-family-separations/ckwa9vc0m5o4y14o3sodg0oaw',
-  center: [-85.7129, 37.0902],
-  //center: [-96, 37.8],
+  style: 'mapbox://styles/154-family-separations/ckwtt4r9i0xbl14pkend62wmv',
+  center: [-95.7129, 36.0902],
   zoom: 3.5,
+});
+
+map.setMaxBounds(map.getBounds());
+
+map.on('load', function() {
+  map.addLayer(
+    {
+      id: 'country-boundaries',
+      source: {
+        type: 'vector',
+        url: 'mapbox://mapbox.country-boundaries-v1',
+      },
+      'source-layer': 'country_boundaries',
+      type: 'fill',
+      paint: {
+        'fill-color': '#636363',
+        'fill-opacity': 0.2,
+      },
+    },
+  );
+  map.setFilter('country-boundaries', [
+    "in",
+    "iso_3166_1_alpha_3",
+    'USA',
+    'HND', 
+    'SLV',
+    'GTM'
+
+  ]);
 });
 
 map.on('mouseover', 'facilities', () => {
@@ -524,7 +553,7 @@ map.on('click', 'facilities', function (e) {
   if (features.length) {
     //show name and value in sidebar
 
-    d3.csv('facility_stats.csv', d3.autoType).then((data) => {
+    d3.csv('map_data.csv', d3.autoType).then((data) => {
       summary_data = data.find(
         (row) => row.FACILITY_APPROVED === facilityProps.FACILITY_APPROVED
       );
