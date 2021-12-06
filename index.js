@@ -53,3 +53,83 @@ new ScrollMagic.Scene({ triggerElement: '#img4' })
 new ScrollMagic.Scene({ triggerElement: '#map', triggerHook: 'onEnter' })
   .setClassToggle('#map-title', 'active')
   .addTo(controller);
+
+const position0 = {
+  center: [-85.7129, 37.0902],
+  offset: [-200, 0],
+  zoom: 3.5,
+  speed: 0.75,
+  curve: 1.5,
+};
+
+const position1 = {
+  center: [-73.9307, 40.8088],
+  zoom: 10,
+  speed: 0.75,
+  curve: 1.5,
+};
+
+const pin = new ScrollMagic.Scene({
+  triggerElement: '#map',
+  triggerHook: 'onLeave',
+})
+  .setPin('#map')
+  .setClassToggle('#cayuga-demo', 'send-to-front');
+
+pin.addTo(controller);
+// .addIndicators({name: "2 (duration: 0)"}) // add indicators (requires plugin)
+
+new ScrollMagic.Scene({
+  triggerElement: '#scrollmap-content-1',
+  triggerHook: 'onEnter',
+})
+  .on('enter', (event) => {
+    console.log(event.type);
+    map.flyTo(position1);
+  })
+  .on('leave', (event) => {
+    console.log(event.type);
+    map.flyTo(position0);
+  })
+
+  // .addIndicators({name: "2 (duration: 0)"}) // add indicators (requires plugin)
+  .addTo(controller);
+
+new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-2' })
+  .on('enter', (event) => {
+    console.log(event.type);
+    map.flyTo({
+      center: [-85, 36],
+      offset: [-200, 0],
+      zoom: 7,
+      speed: 0.75,
+      curve: 1.5,
+    });
+  })
+  .on('leave', (event) => {
+    console.log(event.type);
+    map.flyTo(position1);
+  })
+
+  // .addIndicators({name: "2 (duration: 0)"}) // add indicators (requires plugin)
+  .addTo(controller);
+
+new ScrollMagic.Scene({ triggerElement: '#last-thing' })
+  .setClassToggle('#map', 'send-to-front')
+  .on('enter', (event) => {
+    map.flyTo(position0);
+  })
+  .on('leave', (event) => {
+    map.flyTo(position1);
+  })
+  .addTo(controller);
+
+new ScrollMagic.Scene({ triggerElement: '#last-thing' })
+  .on('enter', (event) => {
+    console.log('yo, entered:)');
+    d3.select('#cayuga-demo').attr('class', 'send-to-back');
+  })
+  .on('leave', (event) => {
+    d3.select('#cayuga-demo').attr('class', 'send-to-front');
+  })
+  .addTo(controller);
