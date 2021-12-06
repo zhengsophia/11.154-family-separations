@@ -1,13 +1,13 @@
 // bubbleChart creation function; instantiate new bubble chart given a DOM element to display it in and a dataset to visualise
 function bubbleChart() {
-    const width = 2000;
-    const height = 1000;
+    const width = 1200;
+    const height = 500;
   
     // location to centre the bubbles
     const centre = { x: width/2, y: height/2 };
   
     // strength to apply to the position forces
-    const forceStrength = 0.03;
+    const forceStrength = 0.05;
   
     // these will be set in createNodes and chart functions
     let svg = null;
