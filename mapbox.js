@@ -421,6 +421,7 @@ const loadAndDraw = (facility) => {
 mapboxgl.accessToken =
   'pk.eyJ1IjoiMTU0LWZhbWlseS1zZXBhcmF0aW9ucyIsImEiOiJja3c4MGhobjJjbW9jMm5xMXNyd21xNXI5In0.hkF5HVL6mdh7v0M0eKaYPg';
 
+
 const map = new mapboxgl.Map({
   container: 'map',
   // Replace YOUR_STYLE_URL with your style URL.
@@ -456,6 +457,48 @@ map.on('load', function() {
     'GTM'
 
   ]);
+
+
+  const layers = [
+    '0-10',
+    '10-20',
+    '20-50',
+    '50-100',
+    '100-200',
+    '200-500',
+    '500-1000',
+    '1000+'
+  ];
+  const colors = [
+    '#FFEDA0',
+    '#FED976',
+    '#FEB24C',
+    '#FD8D3C',
+    '#FC4E2A',
+    '#E31A1C',
+    '#BD0026',
+    '#800026'
+  ];
+
+    // create legend
+  const legend = document.getElementById('legend');
+  
+  layers.forEach((layer, i) => {
+  const color = colors[i];
+  const item = document.createElement('div');
+  const key = document.createElement('span');
+  key.className = 'legend-key';
+  key.style.backgroundColor = color;
+  
+  const value = document.createElement('span');
+  value.innerHTML = `${layer}`;
+  item.appendChild(key);
+  item.appendChild(value);
+  legend.appendChild(item);
+  });
+
+
+
 });
 
 map.on('mouseover', 'facilities', () => {
@@ -514,7 +557,7 @@ const displaySidebar = (facilityProps, summaryData) => {
     mapElement.removeChild(sidebar);
     map.flyTo({
       center: [-85.7129, 37.0902],
-      offset: [-200, 0],
+      //offset: [-200, 0],
       zoom: 3.5,
       speed: 0.75,
       curve: 1.5,
@@ -532,7 +575,7 @@ map.on('click', 'facilities', function (e) {
 
   map.flyTo({
     center: feature.geometry.coordinates,
-    offset: [-400, 0],
+    offset: [-500, 0],
     zoom: 9,
     speed: 0.75,
     curve: 1.5,
