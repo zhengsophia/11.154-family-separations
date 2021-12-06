@@ -32,14 +32,40 @@
       </header>
       <div>
         <div class="spacer" id="spacer2"></div>
-        <iframe id="arc" src="cayuga_demo.html" width="100%" height="100%"></iframe>
+        <!-- <iframe id="arc" src="cayuga_demo.html" width="100%" height="100%"></iframe> -->
         <!-- <h2 id="reveal-subheading" class="sticky-scroll-text stick-to-center">
           A Scrollytelly website by Kelly Fang, Enrique Casillas, Lukas
           Drexler-Bruce, and Sophia Zheng
         </h2> -->
         <!-- <div class="spacer"></div> -->
         <!-- <div class="spacer" id="spacer3"></div> -->
-      </div>
+        <!-- START OF NEW -->
+        <!-- <div id="scrollytelling-map-container" >
+          <div id="map" class="send-to-back"><iframe id="cayuga-demo" src="cayuga_demo.html" width="100%" height="100%"></iframe></div>
+          <div id="scrollmap-content-0">
+            <h1>Where are the children?</h1>
+          </div>  
+          <div id="spacer1" class="spacer"></div>
+          <div id="scrollmap-content-1">
+            <div class="row d-flex align-items-center">
+              <div class="col-6 d-flex justify-content-center">
+                <h1>Case Study:</h1>
+              </div>
+              <div class="col-6 d-flex justify-content-center">
+                <img src="images/cauyga-centers.png" />
+              </div>
+            </div>
+          </div>
+          <div id="spacer1" class="spacer"></div>
+          <div id="scrollmap-content-2"><h1>HELLO this is content 2</h1></div>
+          <div id="last-thing" class="spacer"></div>
+          <div id="map">
+              <div id="tooltip-name"></div>
+            <div id='tooltip'></div>
+            </div>
+          <script src="./mapbox.js"></script>
+        </div>
+        </div> -->
 
       <div id="main-content" class="row">
         <h2>The Height of Family Separations</h2>
@@ -152,7 +178,7 @@
       
     </div> -->
     
-    <div id="map" class="send-to-back"><iframe id="cayuga-demo" src="cayuga_demo.html" width="100%" height="100%"></iframe></div>
+    <!-- <div id="map" class="send-to-back"><iframe id="cayuga-demo" src="cayuga_demo.html" width="100%" height="100%"></iframe></div>
     <div id="scrollmap-content-0">
       <h1>Where are the children?</h1>
     </div>  
@@ -169,12 +195,13 @@
     </div>
     <div id="spacer1" class="spacer"></div>
     <div id="scrollmap-content-2"><h1>HELLO this is content 2</h1></div>
-    <div id="last-thing" class="spacer"></div>
-    <!-- <div id="map"> -->
-        <!-- <div id="tooltip-name"></div>
-      <div id='tooltip'></div> -->
-      <!-- </div> -->
-    <!-- </div> -->
+    <div id="last-thing" class="spacer"></div> -->
+    <div id="map">
+        <div id="tooltip-name"></div>
+      <div id='tooltip'></div>
+      </div>
+      <div class="map-overlay" id="legend" style="z-index: 100"></div>
+    </div>
     <script src="./mapbox.js"></script>
     <div class='map-overlay' id='legend'></div>
     <!-- <iframe id="arc" src="modal.html" width="100%" height="100%"></iframe> -->

@@ -287,6 +287,7 @@ hr {
 }
 
 
+<<<<<<< Updated upstream
 /* --------------------- */
 /*    MAPBOX STYLING     */
 /* --------------------- */
@@ -299,18 +300,40 @@ hr {
   background: #fff;
   margin-right: 20px;
   margin-left: 60px;
+=======
+.map-overlay {
+  position: relative;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  margin-right: 20px;
+>>>>>>> Stashed changes
   font-family: Arial, sans-serif;
   overflow: auto;
   border-radius: 3px;
   }
+<<<<<<< Updated upstream
  
+=======
+
+  #features {
+  top: 0;
+  height: 100px;
+  margin-top: 20px;
+  width: 250px;
+  }
+>>>>>>> Stashed changes
   #legend {
   padding: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   line-height: 18px;
   height: 150px;
   margin-bottom: 40px;
+<<<<<<< Updated upstream
   width: 200px;
+=======
+  width: 100px;
+>>>>>>> Stashed changes
   }
   .legend-key {
   display: inline-block;
@@ -318,4 +341,8 @@ hr {
   width: 10px;
   height: 10px;
   margin-right: 5px;
+<<<<<<< Updated upstream
   }
+=======
+  }
+>>>>>>> Stashed changes
