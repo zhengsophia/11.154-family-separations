@@ -21,6 +21,8 @@ new ScrollMagic.Scene({
   .setClassToggle('#bubble_caption', 'active')
   .addTo(controller);
 
+
+
 // Deactivate Caption
 new ScrollMagic.Scene({
   triggerElement: '#spacer3',
