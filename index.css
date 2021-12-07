@@ -277,13 +277,13 @@ hr {
   color: var(--yellow);
 }
 
-.sidebar-summary-label {
+.sidebar-summary-main {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   color: var(--off-white);
   font-size: 20pt;
 }
 
-.sidebar-summary-label b {
+.sidebar-summary-main b {
   font-size: 30pt;
   padding: 0 3pt 0 3pt;
   color: var(--yellow);
@@ -292,7 +292,15 @@ hr {
 .sidebar-summary-container {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 0% 5% 0 5%;
+}
+
+.sidebar-summary-container label {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: large;
+  color: var(--light-gray);
 }
 
 #scrollytelling-map-container {

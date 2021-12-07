@@ -52,15 +52,14 @@ function createPoints(a, b, c, rangeX, step) {
  * @param {number} i - The category index
  * @returns {string} Category description
  */
-const getCategoryDescription = (i) => {
+const getCategoryDescription = (i, percentages) => {
   if (i === 0) {
-    return 'Before ZTP';
+    return `Before ZTP (${Math.round(percentages[i] * 100)}%)`;
   }
   if (i === 1) {
-    return 'During ZTP';
+    return `During ZTP (${Math.round(percentages[i] * 100)}%)`;
   }
-
-  return 'After ZTP';
+  return `After ZTP (${Math.round(percentages[i] * 100)}%)`;
 };
 
 const getLegendHover = (i) => {
@@ -116,12 +115,21 @@ const resolveDateToCategory = (date) => {
  */
 const drawArcDiagram = (data) => {
   console.log(data);
-
   const facilityName = data[0].FACILITY_APPROVED;
+
+  data = data.filter((row) => row.Duration !== 0);
+
   const facilityId = dashify(facilityName);
   const summaryTextId = `summary-text-${facilityId}`;
   const summaryTextTotalDaysId = `summary-text-total-days-${facilityId}`;
-  const summaryTextTotalChildrenId = `summary-text-total-children-${facilityId}`;
+
+  if (data.length === 0) {
+    const summaryText = d3.select(`#${summaryTextId}`);
+    summaryText.html(
+      'No children from this facility were reunited with their families.'
+    );
+    return;
+  }
 
   // Create the SVG viewbox
   const svg = d3
@@ -172,6 +180,19 @@ const drawArcDiagram = (data) => {
   const legendSpacing = 20;
   const legendDotRadius = 5;
 
+  const duringZTP = data.filter(
+    (d) => ztpStart <= d.DATE_APPREHENDED && d.DATE_APPREHENDED <= ztpEnd
+  );
+  const beforeZTP = data.filter((d) => d.DATE_APPREHENDED < ztpStart);
+
+  const duringZTPPercent = duringZTP.length / data.length;
+  const beforeZTPPercent = beforeZTP.length / data.length;
+  const percentages = [
+    beforeZTPPercent,
+    duringZTPPercent,
+    1 - beforeZTPPercent - duringZTPPercent,
+  ];
+
   // Draw the legend dots
   const legendItems = svg
     .selectAll('legend-dots')
@@ -194,7 +215,7 @@ const drawArcDiagram = (data) => {
     .attr('y', (d, i) => marginTop + i * legendSpacing + 1)
     .style('font-size', '10pt')
     .style('fill', '#bdbdbd')
-    .text(getCategoryDescription)
+    .text((d) => getCategoryDescription(d, percentages))
     .attr('text-anchor', 'left')
     .style('alignment-baseline', 'middle');
 
@@ -346,14 +367,6 @@ const drawArcDiagram = (data) => {
                 newTotalDays
               )}</b> days.`
             );
-            // d3.select(`#${summaryTextTotalChildrenId}`).text(
-            //   commaFormat(i + 1)
-            // );
-            // d3.select(`#${summaryTextTotalChildrenId}`).text(
-            //   `${facilityName} had ${
-            //     i + 1
-            //   } separated children for a total of ${newTotalDays} days.`
-            // );
           } catch (error) {
             // Don't do anything if that modal is gone
             console.log('Returning, caused by another modal being opened');
@@ -420,11 +433,8 @@ const drawArcDiagram = (data) => {
 const loadAndDraw = (facility) => {
   // Load data from CSV and show the bar chart
   d3.csv('arc_data.csv', d3.autoType).then((data) => {
-    data = data.filter((row) => row.Duration !== 0);
-    const tempFacility = facility;
-    drawArcDiagram(
-      data.filter((record) => record.FACILITY_APPROVED === tempFacility)
-    );
+    data = data.filter((record) => record.FACILITY_APPROVED === facility);
+    drawArcDiagram(data);
   });
 };
 
@@ -544,9 +554,10 @@ const displaySidebar = (facilityProps, summaryData) => {
       <div id="arc-diagram"></div>
       
       <div class="sidebar-summary-container">
-        <h3 class="sidebar-summary-label" style="text-align: center" id="summary-text-${dashify(
+        <h3 class="sidebar-summary-main" style="text-align: center" id="summary-text-${dashify(
           facilityProps.FACILITY_APPROVED
         )}">Waiting for data...</h3>
+        <label>(Out of those reunited)</label>
       </div>
     </div>`;
 
