@@ -412,6 +412,15 @@ new ScrollMagic.Scene({ triggerElement: '#last-thing' })
   })
   .addTo(controller);
 
+new ScrollMagic.Scene({ triggerElement: '#remove-the-sidebar' })
+  .on('enter', (event) => {
+    removeSidebar();
+  })
+  .on('leave', (event) => {
+    // displaySidebar();
+  })
+  .addTo(controller);
+
 new ScrollMagic.Scene({ triggerElement: '#last-thing' })
   .on('enter', (event) => {
     console.log('yo, entered:)');
