@@ -332,6 +332,13 @@ const showCayugaSidebar = () => {
   displaySidebar(facilityProps, summaryData);
 };
 
+const removeSidebar = () => {
+  const mapElement = document.getElementById('map');
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) {
+    mapElement.removeChild(sidebar);
+  }
+};
 // Scene 2, stay at Cayuga, show sidebar
 new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-2' })
   // .setClassToggle('#cayuga-demo', 'active')
@@ -378,11 +385,20 @@ new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-4' })
 // Scene 5, show the arc diagram
 new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-5' })
   .on('enter', (event) => {
-    showCayugaSidebar();
     d3.select('#arc-diagram').style('display', '');
   })
   .on('leave', (enter) => {
     d3.select('#arc-diagram').style('display', 'none');
+  })
+  .addTo(controller);
+
+// Scene 6, show the final summary text
+new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-6' })
+  .on('enter', (event) => {
+    d3.select('#sidebar-summary-container').style('display', '');
+  })
+  .on('leave', (enter) => {
+    d3.select('#sidebar-summary-container').style('display', 'none');
   })
   .addTo(controller);
 
@@ -399,14 +415,10 @@ new ScrollMagic.Scene({ triggerElement: '#last-thing' })
 new ScrollMagic.Scene({ triggerElement: '#last-thing' })
   .on('enter', (event) => {
     console.log('yo, entered:)');
-    d3.select('#cayuga-demo').attr('class', 'send-to-back');
-    const mapElement = document.getElementById('map');
-    const sidebar = document.getElementById('sidebar');
-    if (sidebar) {
-      mapElement.removeChild(sidebar);
-    }
+    map.addControl(nav, 'top-left');
   })
   .on('leave', (event) => {
-    d3.select('#cayuga-demo').attr('class', 'send-to-front');
+    removeSidebar();
+    map.removeControl(nav);
   })
   .addTo(controller);

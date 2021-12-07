@@ -652,5 +652,3 @@ var nav = new mapboxgl.NavigationControl({
   showCompass: false,
   showZoom: true,
 });
-
-map.addControl(nav, 'top-left');

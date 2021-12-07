@@ -339,6 +339,7 @@ hr {
   position: fixed;
   right: 0pt;
   width: 60%;
+  z-index: -1;
 }
 
 @keyframes FadeIn {
