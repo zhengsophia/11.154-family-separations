@@ -289,13 +289,8 @@ const drawArcDiagram = (data) => {
         c = 0;
 
       // Get the color based on the date apprehended
-      let dateApprehended = migrantData.DATE_APPREHENDED.split('/');
-      dateApprehendedObj = new Date(
-        dateApprehended[2],
-        dateApprehended[0] - 1,
-        dateApprehended[1]
-      );
-      const color = colors(resolveDateToCategory(dateApprehendedObj));
+      let dateApprehended = migrantData.DATE_APPREHENDED;
+      const color = colors(resolveDateToCategory(dateApprehended));
 
       // Points generated from quadratic formula
       const points = createPoints(a, b, c, [0, xScale(stayDuration)], pathStep);
