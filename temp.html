@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="sidebar-header">
+    <h2>${facilityProps.FACILITY_APPROVED}</h2>
+    <button
+      id="close-sidebar"
+      type="button"
+      class="btn-close btn-close-white btn-lg"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  <div class="row sidebar-top-row">
+    <div class="col-6 text-center">
+      <h3 class="sidebar-top-labels">Average duration of separation</h3>
+      <h1 class="text-center sidebar-top-values">
+        ${Math.round( summaryData.Duration )}
+      </h1>
+    </div>
+    <div class="col-6 text-center">
+      <h3 class="sidebar-top-labels">Reunification rate</h3>
+      <h1 class="text-center sidebar-top-values">
+        ${Math.round( summaryData.discharge_rate * 100 )}%
+      </h1>
+    </div>
+  </div>
+  <div id="arc-diagram"></div>
+  <div class="sidebar-summary-container">
+    <h3
+      class="sidebar-summary-label"
+      style="text-align: center"
+      id="summary-text-${dashify(
+      facilityProps.FACILITY_APPROVED
+    )}"
+    >
+      Waiting for data...
+    </h3>
+  </div>
+</div>

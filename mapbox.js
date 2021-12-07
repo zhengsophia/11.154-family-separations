@@ -1,11 +1,9 @@
-const width = 800;
-const height = 400;
+const width = 600;
+const height = 250;
 const marginLeft = 30;
 const marginRight = 30;
-const marginTop = 30;
+const marginTop = 20;
 const marginBottom = 30;
-
-const barColor = '#ffb752';
 
 const commaFormat = d3.format(',');
 
@@ -65,6 +63,16 @@ const getCategoryDescription = (i) => {
   return 'After ZTP';
 };
 
+const getLegendHover = (i) => {
+  if (i === 0) {
+    return 'Child was sent to this facility <i>before</i> the ZTP was put in place';
+  }
+  if (i === 1) {
+    return 'Child was sent to this facility <i>during</i> the ZTP policy period';
+  }
+  return 'Child was sent to this facility <i>after</i> the ZTP was put in place';
+};
+
 /**
  * Converts a date to the category depending on whether it is before the ZTP,
  * after ZTP, or during.
@@ -109,7 +117,9 @@ const resolveDateToCategory = (date) => {
 const drawArcDiagram = (data) => {
   console.log(data);
 
-  const facilityId = dashify(data[0].FACILITY_APPROVED);
+  const facilityName = data[0].FACILITY_APPROVED;
+  const facilityId = dashify(facilityName);
+  const summaryTextId = `summary-text-${facilityId}`;
   const summaryTextTotalDaysId = `summary-text-total-days-${facilityId}`;
   const summaryTextTotalChildrenId = `summary-text-total-children-${facilityId}`;
 
@@ -120,21 +130,23 @@ const drawArcDiagram = (data) => {
     .attr('viewBox', [
       0,
       0,
-      width + marginLeft + marginRight,
-      height + marginTop + marginBottom,
+      width + marginRight + marginLeft,
+      height + marginBottom,
     ]);
+  // .attr('width', width)
+  // .attr('height', height);
 
   // Draw the title
-  svg
-    .append('text')
-    .attr('font-family', 'Times New Roman')
-    .attr('font-weight', 100)
-    .attr('font-size', '42px')
-    .attr('fill', '#eeeeee')
-    .attr('text-anchor', 'middle')
-    .attr('x', width / 2)
-    .attr('y', marginTop)
-    .text('Separation Duration');
+  // svg
+  //   .append('text')
+  //   .attr('font-family', 'Times New Roman')
+  //   .attr('font-weight', 100)
+  //   .attr('font-size', '42px')
+  //   .attr('fill', '#eeeeee')
+  //   .attr('text-anchor', 'middle')
+  //   .attr('x', width / 2)
+  //   .attr('y', marginTop)
+  //   .text('Separation Duration');
 
   // Draw the summary text
   const summaryText = svg.append('g');
@@ -143,45 +155,8 @@ const drawArcDiagram = (data) => {
   summaryText
     .append('text')
     .attr('id', summaryTextTotalDaysId)
-    .attr('font-size', '32px')
-    .attr('fill', '#eeeeee')
-    .attr('x', width - marginRight - 15)
-    .attr('y', marginTop)
+    .style('display', 'none')
     .text(0);
-
-  // Total days label
-  summaryText
-    .append('text')
-    .attr('font-size', '28px')
-    .attr('fill', '#aaaaaa')
-    .attr('x', width - marginRight - 15)
-    .attr('y', marginTop + 30)
-    .text('total days');
-
-  // Total children value
-  summaryText
-    .append('text')
-    .attr('id', summaryTextTotalChildrenId)
-    .attr('font-size', '32px')
-    .attr('fill', '#eeeeee')
-    .attr('x', width - marginRight - 15)
-    .attr('y', marginTop + 80)
-    .text(0);
-
-  // Total children label
-  summaryText
-    .append('text')
-    .attr('font-size', '28px')
-    .attr('fill', '#aaaaaa')
-    .attr('x', width - marginRight - 15)
-    .attr('y', marginTop + 110)
-    .text('children separated');
-
-  // Styling for summary text
-  summaryText
-    .selectAll('text')
-    .attr('font-family', 'Times New Roman')
-    .attr('text-anchor', 'middle');
 
   // Extract the endpoints for scaling purposes
   const endpoints = data.map((x) => x.Duration);
@@ -192,30 +167,61 @@ const drawArcDiagram = (data) => {
     .domain([0, 1, 2])
     .range(['#FDAE61', '#D53E4F', '#F46D43']);
 
+  // Draw the legend
+
+  const legendSpacing = 20;
+  const legendDotRadius = 5;
+
   // Draw the legend dots
-  svg
+  const legendItems = svg
     .selectAll('legend-dots')
     .data([0, 1, 2])
     .enter()
+    .append('g');
+
+  legendItems
     .append('circle')
     .attr('cx', marginLeft)
-    .attr('cy', (d, i) => marginTop + i * 25)
-    .attr('r', 7)
+    .attr('cy', (d, i) => marginTop + i * legendSpacing)
+    .attr('r', legendDotRadius)
     .style('fill', colors);
 
   // Draw the legend labels
-  svg
-    .selectAll('legend-labels')
-    .data([0, 1, 2])
-    .enter()
+  legendItems
     .append('text')
     .attr('font-family', 'Times New Roman')
-    .attr('x', marginLeft + 20)
-    .attr('y', (d, i) => marginTop + i * 25)
-    .style('fill', '#eeeeee')
+    .attr('x', marginLeft + legendDotRadius * 3)
+    .attr('y', (d, i) => marginTop + i * legendSpacing + 1)
+    .style('font-size', '10pt')
+    .style('fill', '#bdbdbd')
     .text(getCategoryDescription)
     .attr('text-anchor', 'left')
     .style('alignment-baseline', 'middle');
+
+  legendItems
+    .on('mouseover', function (event, d) {
+      console.log(event);
+      d3.select('#arc-tooltip')
+        .style('left', event.pageX + 15 + 'px')
+        .style('top', event.pageY + 'px')
+
+        .classed('hidden', false);
+      d3.select('#value').html(getLegendHover(d));
+      // Update the arc's styling
+      const labelThing = d3.select(this).select('text');
+      // const thisArc = d3.select(this);
+      // thisArc
+      //   .attr('stroke-width', pathHoverStroke)
+      //   .style('filter', `drop-shadow(0px 0px 3px ${thisArc.attr('stroke')})`);
+    })
+    .on('mousemove', (event) => {
+      d3.select('#arc-tooltip')
+        .style('left', event.pageX + 15 + 'px')
+        .style('top', event.pageY + 'px');
+    })
+    .on('mouseout', function () {
+      d3.select('#arc-tooltip').classed('hidden', true);
+    });
 
   // const colors = d3
   //   .scaleLinear()
@@ -226,14 +232,14 @@ const drawArcDiagram = (data) => {
   const xScale = d3
     .scaleLinear()
     .domain([0, d3.max(endpoints) + 1])
-    .range([0, width]);
+    .range([0, marginLeft + width - marginRight]);
 
   const xAxis = d3.axisBottom(xScale).ticks(10);
 
   const yScale = d3
     .scaleLinear()
     .domain([0, d3.max(endpoints)])
-    .range([marginBottom, height - marginTop - 10]);
+    .range([marginBottom, marginBottom + height + marginTop - 10]);
 
   // Draw the x-axis
   svg
@@ -247,11 +253,11 @@ const drawArcDiagram = (data) => {
     .append('text')
     .attr('font-family', 'Times New Roman')
     .attr('font-weight', 100)
-    .attr('font-size', '28px')
+    .attr('font-size', '22px')
     .attr('fill', '#aaaaaa')
     .attr('text-anchor', 'middle')
     .attr('x', width / 2 + marginLeft)
-    .attr('y', height + marginBottom)
+    .attr('y', height + marginTop)
     .text('days');
 
   // Define arc constants
@@ -328,6 +334,9 @@ const drawArcDiagram = (data) => {
             .style('opacity', 1);
           // When the arc animation ends, update the counters
           try {
+            const summaryText = d3.select(`#${summaryTextId}`);
+            // console.log(summaryText);
+
             const currentTotalDays = parseInt(
               d3.select(`#${summaryTextTotalDaysId}`).text().replace(/,/g, '')
             );
@@ -335,9 +344,21 @@ const drawArcDiagram = (data) => {
             d3.select(`#${summaryTextTotalDaysId}`).text(
               commaFormat(newTotalDays)
             );
-            d3.select(`#${summaryTextTotalChildrenId}`).text(
-              commaFormat(i + 1)
+            summaryText.html(
+              `${facilityName} had <b>${
+                i + 1
+              }</b> separated children for a total of <b>${commaFormat(
+                newTotalDays
+              )}</b> days.`
             );
+            // d3.select(`#${summaryTextTotalChildrenId}`).text(
+            //   commaFormat(i + 1)
+            // );
+            // d3.select(`#${summaryTextTotalChildrenId}`).text(
+            //   `${facilityName} had ${
+            //     i + 1
+            //   } separated children for a total of ${newTotalDays} days.`
+            // );
           } catch (error) {
             // Don't do anything if that modal is gone
             console.log('Returning, caused by another modal being opened');
@@ -404,8 +425,7 @@ const drawArcDiagram = (data) => {
 const loadAndDraw = (facility) => {
   // Load data from CSV and show the bar chart
   d3.csv('arc_data.csv', d3.autoType).then((data) => {
-    data = data.filter((row) => row.Duration !== 'no discharge');
-
+    data = data.filter((row) => row.Duration !== 0);
     const tempFacility = facility;
     drawArcDiagram(
       data.filter((record) => record.FACILITY_APPROVED === tempFacility)
@@ -421,7 +441,6 @@ const loadAndDraw = (facility) => {
 mapboxgl.accessToken =
   'pk.eyJ1IjoiMTU0LWZhbWlseS1zZXBhcmF0aW9ucyIsImEiOiJja3c4MGhobjJjbW9jMm5xMXNyd21xNXI5In0.hkF5HVL6mdh7v0M0eKaYPg';
 
-
 const map = new mapboxgl.Map({
   container: 'map',
   // Replace YOUR_STYLE_URL with your style URL.
@@ -432,32 +451,28 @@ const map = new mapboxgl.Map({
 
 map.setMaxBounds(map.getBounds());
 
-map.on('load', function() {
-  map.addLayer(
-    {
-      id: 'country-boundaries',
-      source: {
-        type: 'vector',
-        url: 'mapbox://mapbox.country-boundaries-v1',
-      },
-      'source-layer': 'country_boundaries',
-      type: 'fill',
-      paint: {
-        'fill-color': '#636363',
-        'fill-opacity': 0.2,
-      },
+map.on('load', function () {
+  map.addLayer({
+    id: 'country-boundaries',
+    source: {
+      type: 'vector',
+      url: 'mapbox://mapbox.country-boundaries-v1',
     },
-  );
+    'source-layer': 'country_boundaries',
+    type: 'fill',
+    paint: {
+      'fill-color': '#636363',
+      'fill-opacity': 0.2,
+    },
+  });
   map.setFilter('country-boundaries', [
-    "in",
-    "iso_3166_1_alpha_3",
+    'in',
+    'iso_3166_1_alpha_3',
     'USA',
-    'HND', 
+    'HND',
     'SLV',
-    'GTM'
-
+    'GTM',
   ]);
-
 
   const layers = [
     '0-10',
@@ -467,7 +482,7 @@ map.on('load', function() {
     '100-200',
     '200-500',
     '500-1000',
-    '1000+'
+    '1000+',
   ];
   const colors = [
     '#FFEDA0',
@@ -477,28 +492,25 @@ map.on('load', function() {
     '#FC4E2A',
     '#E31A1C',
     '#BD0026',
-    '#800026'
+    '#800026',
   ];
 
-    // create legend
+  // create legend
   const legend = document.getElementById('legend');
-  
+
   layers.forEach((layer, i) => {
-  const color = colors[i];
-  const item = document.createElement('div');
-  const key = document.createElement('span');
-  key.className = 'legend-key';
-  key.style.backgroundColor = color;
-  
-  const value = document.createElement('span');
-  value.innerHTML = `${layer}`;
-  item.appendChild(key);
-  item.appendChild(value);
-  legend.appendChild(item);
+    const color = colors[i];
+    const item = document.createElement('div');
+    const key = document.createElement('span');
+    key.className = 'legend-key';
+    key.style.backgroundColor = color;
+
+    const value = document.createElement('span');
+    value.innerHTML = `${layer}`;
+    item.appendChild(key);
+    item.appendChild(value);
+    legend.appendChild(item);
   });
-
-
-
 });
 
 map.on('mouseover', 'facilities', () => {
@@ -531,22 +543,30 @@ const displaySidebar = (facilityProps, summaryData) => {
         <h2>${facilityProps.FACILITY_APPROVED}</h2>
         <button id="close-sidebar" type="button" class="btn-close btn-close-white btn-lg" aria-label="Close"></button>    
       </div>
-      </div>
-      <div class="row">
-        <div class="col-6 text-center">
-          <h3>Average duration of separation</h3>
-          <h1 class="text-center">${Math.round(summaryData.Duration)} DAYS</h1>
-        </div>
-        <div class="col-6 text-center">
-          <h3>Reunification rate</h3>
-          <h1 class="text-center">${Math.round(
-            summaryData.discharge_rate * 100
-          )}%</h1>
-        </div>
-      </div>
-      <div id="arc-diagram">
-      </div>
+      <hr>
       
+      <div class="row sidebar-top-row">
+        <div class="col-6 text-center">
+          <h3 class="sidebar-top-labels">Average duration of separation</h3>
+          <h1 class="text-center sidebar-top-values">${Math.round(
+            summaryData.Duration
+          )}<label>days</label></h1>
+          
+        </div>
+        <div class="col-6 text-center">
+          <h3 class="sidebar-top-labels">Reunification rate</h3>
+          <h1 class="text-center sidebar-top-values">${Math.round(
+            summaryData.discharge_rate * 100
+          )}<label>%</label></h1>
+        </div>
+      </div>
+      <div id="arc-diagram"></div>
+      
+      <div class="sidebar-summary-container">
+        <h3 class="sidebar-summary-label" style="text-align: center" id="summary-text-${dashify(
+          facilityProps.FACILITY_APPROVED
+        )}">Waiting for data...</h3>
+      </div>
     </div>`;
 
   loadAndDraw(facilityProps.FACILITY_APPROVED);
@@ -600,6 +620,8 @@ map.on('click', 'facilities', function (e) {
       summary_data = data.find(
         (row) => row.FACILITY_APPROVED === facilityProps.FACILITY_APPROVED
       );
+      console.log(facilityProps);
+      console.log(summary_data);
       displaySidebar(facilityProps, summary_data);
     });
   } else {
@@ -608,6 +630,29 @@ map.on('click', 'facilities', function (e) {
     map.removeChild(document.getElementById('sidebar'));
   }
 });
+
+// TESTING CODE!!
+// let facilityProps = {
+//   Duration: '45.42857142857143',
+//   FACILITY_APPROVED:
+//     'Lutheran Social Services of Carolinas - Transitional Foster Care',
+//   FIELD1: 44,
+//   count: 7,
+//   discharge_rate: '1.0',
+//   status: 'low',
+// };
+// let summaryData = {
+//   Duration: 45.42857142857143,
+//   FACILITY_APPROVED:
+//     'Lutheran Social Services of Carolinas - Transitional Foster Care',
+//   count: 7,
+//   discharge_rate: 0.8571428571428571,
+//   lat: 35.653487891677926,
+//   lon: -80.48559843567813,
+// };
+// displaySidebar(facilityProps, summaryData);
+
+// displaySidebar(facilityProps, )
 
 map.scrollZoom.disable();
 
@@ -626,7 +671,7 @@ const layers = [
   '100-200',
   '200-500',
   '500-1000',
-  '1000+'
+  '1000+',
 ];
 const colors = [
   '#FFEDA0',
@@ -636,7 +681,7 @@ const colors = [
   '#FC4E2A',
   '#E31A1C',
   '#BD0026',
-  '#800026'
+  '#800026',
 ];
 
 // create legend

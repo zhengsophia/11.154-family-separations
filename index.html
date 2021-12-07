@@ -44,8 +44,8 @@
           The Zero Tolerance Policy was responsible for 87% of family
           separations from 2018-2019
         </p>
-        <div id="vis"></div>
-        <script src="./forcedbubble.js"></script>
+        <!-- <div id="vis"></div> -->
+        <!-- <script src="./forcedbubble.js"></script> -->
       </div>
 
       <div class="spacer" id="spacer3"></div>
@@ -185,11 +185,8 @@
       <div id="spacer6" class="spacer"></div>
 
       <div class="row">
-        <img
-          id="img4"
-          class="scrolly-image mx-auto d-block"
-          src="images/migrants.jpg"
-        />
+        <h2 id="map-title" class="scrolly-text">Where Are The Children?</h2>
+        <img id="img4" class="mx-auto d-block" src="images/migrants.jpg" />
         <p id="image_caption4" class="scrolly-text image_caption">
           Placeholder caption
         </p>
@@ -198,19 +195,22 @@
       <div id="spacer7" class="spacer"></div>
 
       <br /><br /><br /><br />
-      <h2 id="map-title" class="scrolly-text">Where Are The Children?</h2>
     </main>
     <div id="arc-tooltip" class="hidden">
       <span id="value"></span>
     </div>
-    <!-- <div id="scrollytelling-map-container" >
-      
-    </div> -->
-
-    <!-- <div id="map" class="send-to-back"><iframe id="cayuga-demo" src="cayuga_demo.html" width="100%" height="100%"></iframe></div>
+    <div id="map" class="send-to-back">
+      <iframe
+        class="scrolly-sidebar"
+        id="cayuga-demo"
+        src="cayuga_demo.html"
+        width="100%"
+        height="100%"
+      ></iframe>
+    </div>
     <div id="scrollmap-content-0">
       <h1>Where are the children?</h1>
-    </div>  
+    </div>
     <div id="spacer1" class="spacer"></div>
     <div id="scrollmap-content-1">
       <div class="row d-flex align-items-center">
@@ -223,15 +223,71 @@
       </div>
     </div>
     <div id="spacer1" class="spacer"></div>
-    <div id="scrollmap-content-2"><h1>HELLO this is content 2</h1></div>
-    <div id="last-thing" class="spacer"></div> -->
-    <div id="map">
+    <div id="scrollmap-content-2" class="scrollytelling-with-sidebar">
+      <img
+        id="img5"
+        class="mx-auto d-block regular-image"
+        src="images/cayugacenters.jpg"
+      />
+      <p id="image_caption5" class="scrolly-image image_caption">
+        Placeholder caption
+      </p>
+      <blockquote>
+        <i
+          >“It seems that <b>Cayuga Centers</b> has evolved into a
+          <b>business</b> whose priority is making money as opposed to a family
+          service that helps youth meet the challenges of life”</i
+        >
+      </blockquote>
+      <label class="author-label">
+        — Officer Joseph Villano (<a
+          href="https://www.nytimes.com/2018/07/31/nyregion/cayuga-centers-immigration-separated-children.html"
+          >New York Times</a
+        >, 2017)
+      </label>
+    </div>
+
+    <div id="spacer1" class="spacer"></div>
+    <div id="scrollmap-content-3" class="scrollytelling-with-sidebar">
+      <!-- <h1>374</h1> -->
+      <p>
+        From the data, Cayuga Centers became the home for the most amount of
+        separated children during the ZTP. Across all children that were
+        reunited with their families, the average amount of time spent at the
+        facility was <b>77</b> days, or around
+        <b>two and a half months.</b>
+      </p>
+      <p>
+        These facilities are responsible for the lives of all these children
+        without their families. Therefore it is important to ask what how they
+        are spending their money and doing their best to provide these children
+        with the best possible living experience.
+      </p>
+    </div>
+    <div id="scrollmap-content-4" class="scrollytelling-with-sidebar">
+      <img src="" />
+      <blockquote>
+        <i
+          >“It seems that <b>Cayuga Centers</b> has evolved into a
+          <b>business</b> whose priority is making money as opposed to a family
+          service that helps youth meet the challenges of life”</i
+        >
+      </blockquote>
+      <label class="author-label">
+        — Officer Joseph Villano (<a
+          href="https://www.nytimes.com/2018/07/31/nyregion/cayuga-centers-immigration-separated-children.html"
+          >New York Times</a
+        >, 2017)
+      </label>
+    </div>
+    <div id="last-thing" class="spacer"></div>
+    <!-- <div id="map">
       <div id="tooltip-name"></div>
       <div id="tooltip"></div>
     </div>
     <div>
       <div class="map-overlay" id="legend" style="z-index: 100"></div>
-    </div>
+    </div> -->
     <script src="./mapbox.js"></script>
     <div class="map-overlay" id="legend"></div>
     <!-- <iframe id="arc" src="modal.html" width="100%" height="100%"></iframe> -->

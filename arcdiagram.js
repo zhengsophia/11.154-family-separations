@@ -182,7 +182,7 @@ const drawArcDiagram = (data) => {
     .append('circle')
     .attr('cx', marginLeft)
     .attr('cy', (d, i) => marginTop + i * 25)
-    .attr('r', 7)
+    .attr('r', 15)
     .style('fill', colors);
 
   // Draw the legend labels

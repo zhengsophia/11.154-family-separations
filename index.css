@@ -1,3 +1,23 @@
+:root {
+  --white: #eee;
+  --off-white: #d8d8d8;
+  --light-gray: #bdbdbd;
+  --primary: #ff8080;
+  --secondary: #ffbfbf;
+  --yellow: #ffc300;
+  --orange: #ff5733;
+  --maroon: #900c3e;
+  --purple: #571845;
+}
+
+a {
+  color: var(--yellow);
+}
+
+a:hover {
+  color: #ffd23e;
+}
+
 p {
   font-family: 'Open Sans', sans-serif;
   color: #eeeeee;
@@ -12,7 +32,7 @@ p {
 
 svg {
   width: 100%;
-  height: 600px;
+  /* height: 600px; */
   padding-left: 5%;
   padding-right: 50px;
 }
@@ -50,6 +70,7 @@ h4 {
 body {
   font-size: 18px;
   background-color: #161616;
+  overflow-x: hidden;
 }
 
 hr {
@@ -78,16 +99,30 @@ hr {
   top: 40%;
 }
 
+.regular-image {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+}
+
 .scrolly-image {
   max-width: 100%;
   max-height: 100%;
   filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
   opacity: 0;
   transition: opacity 1.2s;
   -webkit-transition: opacity 1.2s;
 }
 
 .scrolly-text {
+  max-width: 100%;
+  max-height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s;
+  -webkit-transition: opacity 1.2s;
+}
+
+.scrolly-sidebar {
   max-width: 100%;
   max-height: 100%;
   opacity: 0;
@@ -170,7 +205,13 @@ hr {
 .y-axis {
   stroke: #d4d4d4;
   color: #d4d4d4;
-  font-size: 14px;
+  font-size: 12px;
+}
+
+.x-axis text {
+  font-family: 'Open Sans';
+  font-weight: lighter;
+  stroke: #a3a3a3;
 }
 
 .y-axis .tick line {
@@ -201,15 +242,95 @@ hr {
   transition-timing-function: linear;
 }
 
+#sidebar hr {
+  margin: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2%;
+}
+
+.sidebar-header h2 {
+  color: var(--white);
+}
+
+.sidebar-top-row {
+  padding: 2% 0 2% 0;
+}
+
+.sidebar-top-row label {
+  color: var(--yellow);
+  font-family: 'Open Sans';
+  font-size: xx-large;
+  padding-left: 1%;
+}
+
+.sidebar-top-labels {
+  color: var(--off-white);
+}
+
+.sidebar-top-values {
+  font-family: 'Open Sans';
+  color: var(--yellow);
+}
+
+.sidebar-summary-label {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: var(--off-white);
+  font-size: 20pt;
+}
+
+.sidebar-summary-label b {
+  font-size: 30pt;
+  padding: 0 3pt 0 3pt;
+  color: var(--yellow);
+}
+
+.sidebar-summary-container {
+  display: flex;
+  justify-content: center;
+  padding: 0% 5% 0 5%;
+}
+
 #scrollytelling-map-container {
   z-index: -1;
+}
+
+#img5 {
+  width: 100%;
+}
+
+.scrollytelling-with-sidebar {
+  width: 40%;
+  padding: 2%;
+}
+
+.blurred {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+#scrollmap-content-2 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: xx-large;
+  color: var(--off-white);
+}
+
+.author-label {
+  font-size: large;
+  color: var(--light-gray);
 }
 
 #cayuga-demo {
   position: fixed;
   right: 0pt;
   width: 60%;
-  opacity: 0;
 }
 
 @keyframes FadeIn {
@@ -259,12 +380,6 @@ hr {
   }
 }
 
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 /* --------------------- */
 /* MISCELLANEOUS STYLING */
 /* --------------------- */
@@ -286,11 +401,9 @@ hr {
   background: rgb(63, 63, 63);
 }
 
-
 /* --------------------- */
 /*    MAPBOX STYLING     */
 /* --------------------- */
-
 
 .map-overlay {
   position: relative;
@@ -302,48 +415,41 @@ hr {
   font-family: Arial, sans-serif;
   /* overflow: auto; */
   border-radius: 3px;
-  }
- 
-  #legend {
+}
+
+#legend {
   padding: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   line-height: 18px;
   height: 150px;
   margin-bottom: 40px;
   width: 100px;
-  }
-  .legend-key {
+}
+.legend-key {
   display: inline-block;
   border-radius: 20%;
   width: 10px;
   height: 10px;
   margin-right: 5px;
-  }
+}
 
-  #bubble_caption {
-    font-size: 20px;
-    font-weight: 100;
-    line-height: 1.3;
-    text-align: left;
-    color: #eeeeee;
-    font-family: 'Times New Roman', Times, serif;
-    text-align: center;
-  
-  }
+#bubble_caption {
+  font-size: 20px;
+  font-weight: 100;
+  line-height: 1.3;
+  text-align: left;
+  color: #eeeeee;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+}
 
-  .image_caption {
-    font-style: italic;
-    font-size: 15px;
-    font-weight: 20;
-    line-height: 1.3;
-    text-align: left;
-    color: #eeeeee;
-    font-family: 'Times New Roman', Times, serif;
-    margin-top: 20px;
-  
-  }
-
-
-
-
-
+.image_caption {
+  font-style: italic;
+  font-size: 15px;
+  font-weight: 20;
+  line-height: 1.3;
+  text-align: left;
+  color: #eeeeee;
+  font-family: 'Times New Roman', Times, serif;
+  margin-top: 20px;
+}
