@@ -1,3 +1,4 @@
+
 // bubbleChart creation function; instantiate new bubble chart given a DOM element to display it in and a dataset to visualise
 function bubbleChart() {
     const width = 1200;
@@ -7,7 +8,7 @@ function bubbleChart() {
     const centre = { x: width/2, y: height/2 };
   
     // strength to apply to the position forces
-    const forceStrength = 0.1;
+    const forceStrength = 0.025;
   
     // these will be set in createNodes and chart functions
     let svg = null;
@@ -32,9 +33,9 @@ function bubbleChart() {
     simulation.stop();
   
     // set up colour scale
-    const fillColour = d3.scaleOrdinal()
-        .domain(["1", "2", "3", "5", "99"])
-        .range(["#ff8080", "#900C3E", "#F87C09", "#ffffff", "#FFC300"]);
+    const fillColour = d3.scaleLinear()
+        .domain(["0", "1", "2", "3", "4", "5", "6"])
+        .range(["#ff8080", "#900C3E", "#a63232", "#E52525", "#F87C09", "#FFC300", "#ffffff"]);
   
     // data manipulation function takes raw data from csv and converts it into an array of node objects
     // each node will store data and visualisation values to draw a bubble
@@ -43,7 +44,7 @@ function bubbleChart() {
     function createNodes(rawData) {
       // use max size in the data as the max in the scale's domain
       // note we have to ensure that size is a number
-      const maxSize = d3.max(rawData, d => +d.size*400);
+      const maxSize = d3.max(rawData, d => +d.size)/2;
   
       // size bubbles based on area
       const radiusScale = d3.scaleSqrt()
@@ -92,7 +93,9 @@ function bubbleChart() {
         .attr('dy', '.3em')
         .style('text-anchor', 'middle')
         .style('font-size', 10)
-        .text(d => d.id)
+        .style('color', 'white')
+        .text(d => d.reason)
+        
   
       // set simulation's nodes to our newly created nodes array
       // simulation starts running automatically once nodes are set
@@ -124,6 +127,8 @@ function bubbleChart() {
   // function called once promise is resolved and data is loaded from csv
   // calls bubble chart function to display inside #vis div
   function display(data) {
+
+
     myBubbleChart('#vis', data);
   }
   
