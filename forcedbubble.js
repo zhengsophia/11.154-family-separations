@@ -35,7 +35,7 @@ function bubbleChart() {
     // set up colour scale
     const fillColour = d3.scaleLinear()
         .domain(["0", "1", "2", "3", "4", "5", "6"])
-        .range(["#ff8080", "#900C3E", "#a63232", "#E52525", "#F87C09", "#FFC300", "#ffffff"]);
+        .range(["#ff8080", "#900C3E", "#a63232", "#E52525", "#F87C09", "#FFC300", "#ff5765"]);
   
     // data manipulation function takes raw data from csv and converts it into an array of node objects
     // each node will store data and visualisation values to draw a bubble
@@ -92,9 +92,10 @@ function bubbleChart() {
         .append('text')
         .attr('dy', '.3em')
         .style('text-anchor', 'middle')
-        .style('font-size', 10)
-        .style('color', 'white')
-        .text(d => d.reason)
+        .style('font-size', 8)
+        .style('fill', 'white')
+        .style('font-family','Open Sans')
+        .text(d => d.percent+"%")
         
   
       // set simulation's nodes to our newly created nodes array

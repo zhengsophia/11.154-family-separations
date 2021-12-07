@@ -1,8 +1,8 @@
-,reason,size,groupid,index
-0,Gang Membership or Affiliation,33,4,4
-1,Other,33,6,6
-2,Parent Criminal History,240,1,1
-3,Parent Health Issues or Hospitalization,20,5,5
-4,Parent Immigration History,27,2,2
-5,Parent has both Criminal and Immigration Charges,18,3,3
-6,Zero Tolerance Policy,2476,0,0
+,reason,size,groupid,index,percent
+0,Gang Membership or Affiliation,33,4,4,1.2
+1,Other,33,6,6,1.2
+2,Parent Criminal History,240,1,1,8.4
+3,Parent Health Issues or Hospitalization,20,5,5,0.7
+4,Parent Immigration History,27,2,2,0.9
+5,Parent has both Criminal and Immigration Charges,18,3,3,0.6
+6,Zero Tolerance Policy,2476,0,0, 87
