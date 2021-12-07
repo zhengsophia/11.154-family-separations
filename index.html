@@ -32,53 +32,26 @@
       </header>
       <div>
         <div class="spacer" id="spacer2"></div>
-        <!-- <iframe id="arc" src="cayuga_demo.html" width="100%" height="100%"></iframe> -->
-        <!-- <h2 id="reveal-subheading" class="sticky-scroll-text stick-to-center">
-          A Scrollytelly website by Kelly Fang, Enrique Casillas, Lukas
-          Drexler-Bruce, and Sophia Zheng
-        </h2> -->
-        <!-- <div class="spacer"></div> -->
-        <!-- <div class="spacer" id="spacer3"></div> -->
-        <!-- START OF NEW -->
-        <!-- <div id="scrollytelling-map-container" >
-          <div id="map" class="send-to-back"><iframe id="cayuga-demo" src="cayuga_demo.html" width="100%" height="100%"></iframe></div>
-          <div id="scrollmap-content-0">
-            <h1>Where are the children?</h1>
-          </div>  
-          <div id="spacer1" class="spacer"></div>
-          <div id="scrollmap-content-1">
-            <div class="row d-flex align-items-center">
-              <div class="col-6 d-flex justify-content-center">
-                <h1>Case Study:</h1>
-              </div>
-              <div class="col-6 d-flex justify-content-center">
-                <img src="images/cauyga-centers.png" />
-              </div>
-            </div>
-          </div>
-          <div id="spacer1" class="spacer"></div>
-          <div id="scrollmap-content-2"><h1>HELLO this is content 2</h1></div>
-          <div id="last-thing" class="spacer"></div>
-          <div id="map">
-              <div id="tooltip-name"></div>
-            <div id='tooltip'></div>
-            </div>
-          <script src="./mapbox.js"></script>
-        </div>
-        </div> -->
 
-      <div id = 'vis'></div>
+
+      <div>
+        <p class = "scrolly-text" id = "bubble_caption">The Zero Tolerance Policy was responsible for 87% of family separations from 2018-2019</p>
+        <div id = "vis"></div>
+        <script src="./forcedbubble.js"></script>
+      </div>
+
+
+      <div class="spacer" id="spacer3"></div>
+
+
       
-      <script src="./forcedbubble.js"></script>
-
-      <div id="spacer1" class="spacer"></div>
-
-      <div id="main-content" class="row">
-        <h2>The Height of Family Separations</h2>
+      <div id = "content-1" class = "row">
+        <h2 id = "heading-1a" class = "scrolly-text" >The Height of Family Separations</h2>
         <div class="col-7">
-          <h3>What is the Zero Tolerance Policy?</h3>
+          <br>
+          <h3 id = "heading-1b" class = "scrolly-text" >What is the Zero Tolerance Policy?</h3>
 
-          <p id="text1">
+          <p id="text1" class ='scrolly-text' >
             While family separations at the border were taking place long before
             the implementation of the Zero Tolerance Policy, they grew greatly
             during 2018 and the years following. This is a consequence of the
@@ -96,47 +69,69 @@
             country, although the separations were overwhelmingly a direct
             consequence of the policy.
           </p>
+        </div>
 
-          <br /><br />
+        <div class = "col-5">
+          <img id="img1" class="scrolly-image" src="images/tweet.png" />
+        </div>
+      </div>
 
-          <h3>What did family separations entail?</h3>
+      <div class="spacer" id="spacer4"></div>
 
-          <p id="text2">
-            Because of the Zero Tolerance Policy, over 3000 families were
-            separated. Once reaching the border, children were sent to shelters
-            run by the Department of Health and Human Services, which were
-            sometimes even non profit organizations. This is despite the common
-            belief that these shelters are ICE facilities. However, the
-            conditions are still often inhumane, with shelters being over
-            capacity and failing to meet basic health standards. Children as
-            young as a few months old were separated from their parents. From a
-            humanitarian standpoint, this is unacceptable, especially for a
-            first world country with greater resources than these migrants'
-            countries of origin have. The profit coming in from these shelters
-            from family separations just shows how deportation is a billion
-            dollar industry.
+      <div id="content-2" class = row>
+        <div class = "col-7">
+          <br>
+          <h3 id = "heading-2" class = "scrolly-text">What did family separations entail?</h3>
+          <p id="text2" class = scrolly-text>
+            While family separations at the border were taking place long before
+            the implementation of the Zero Tolerance Policy, they grew greatly
+            during 2018 and the years following. This is a consequence of the
+            Trump administration passing a Zero Tolerance Policy with regards to
+            immigration from May 2018 to June 2018 after its original proposal
+            in April 2018. As a result, migrants seeking entry at the border
+            were arrested for any minor infraction at the discretion of border
+            control. There were no exceptions to this policy, including for
+            asylum seekers, which is a legal pathway to entering the country,
+            and companions who were minors. This lead to widespread prosecution
+            and family separations, particularly impacting Central American
+            migrants from the Northern Triangle countries of Guatemala,
+            Honduras, and El Salvador. Throughout this time, there was a large
+            blame game over the mistreatment of migrants trying to enter the
+            country, although the separations were overwhelmingly a direct
+            consequence of the policy.
           </p>
+        </div>
 
-          <br /><br />
+        <div class = "col-5">
+          <img id="img2" class="scrolly-image" src="images/website_img1.jpg" />
+        </div>
+      </div>
 
-          <h3>When this all becomes public knowledge...</h3>
-          <p id="text3">
+      <div class = "spacer" id = "spacer5"></div>
+
+      <div id = "content-3" class = "row">
+
+        <div class = "col-7">
+          <br>
+          <h3 id = "heading-3" class = "scrolly-text">When this all becomes public knowledge...</h3>
+
+          <p id="text3" class = "scrolly-text">
             In 2018, the American Immigration Council filed a request for
             information on child separations through the Freedom of Information
             Act. As a result, they were able to obtain data sourced from ICE
             including demographics, facility locations, duration of stay, and
             reasons for separation for shelters all across the country.
           </p>
-          <!-- <br /><br /> -->
-          <p>
+
+          <p id="text3" class = "scrolly-text">
             By analyzing this data, our group hopes to identify the lasting
             impacts of the policy even though it was only officially in place
             for a few months. Additionally, we want to bring more awareness to
             the issue of family separations at the border.
           </p>
-          <br /><br />
-          <h3>Interpreting the data</h3>
-          <p id="text3">
+
+          <h3 id = "heading-3" class = "scrolly-text"> Interpreting the data</h3>
+          <p id="text3" class = "scrolly-text">
             There are some key statistics that we chose to focus on within the dataset by displaying
             in our dashboard for each facility.
             <br /><br />
@@ -149,24 +144,23 @@
             <br /><br />
             <!-- do we want to include which specific facilities were unabled to be plotted? -->
           </p>
-          <p id="text3">
+          <p id="text3" class = "scrolly-text">
             Some limitations were present. Not every datapoint from the original dataset were able to be
             plotted because they could not be georeferenced. 
             <!-- do we want to include which specific facilities were unabled to be plotted? -->
           </p>
-          <br /><br />
+
         </div>
 
-        <div class="col-5">
-          <img id="img1" class="scrolly-image" src="images/tweet.png" />
-          <br /><br />
-          <img id="img2" class="scrolly-image" src="images/website_img1.jpg" />
-          <br /><br />
+        <div class = "col-5">
           <img id="img3" class="scrolly-image" src="images/website_img3.jpg" />
         </div>
 
-        <br /><br />
       </div>
+
+      <div id = "spacer6" class = "spacer"></div>
+
+
       <div class="row">
         <img
           id="img4"

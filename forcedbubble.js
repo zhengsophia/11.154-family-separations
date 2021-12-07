@@ -7,7 +7,7 @@ function bubbleChart() {
     const centre = { x: width/2, y: height/2 };
   
     // strength to apply to the position forces
-    const forceStrength = 0.05;
+    const forceStrength = 0.1;
   
     // these will be set in createNodes and chart functions
     let svg = null;

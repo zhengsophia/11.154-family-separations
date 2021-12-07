@@ -105,7 +105,7 @@ hr {
 
 /* Spacers are 100% viewport height, can be used as SM triggers*/
 .spacer {
-  min-height: 100vh;
+  min-height: 80vh;
 }
 
 /* Removes the border from the iframe */
@@ -319,5 +319,19 @@ hr {
   height: 10px;
   margin-right: 5px;
   }
+
+  #bubble_caption {
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 1.3;
+    text-align: left;
+    color: #eeeeee;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+  
+  }
+
+
+
 
 
