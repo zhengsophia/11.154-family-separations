@@ -529,7 +529,7 @@ const displaySidebar = (facilityProps, summaryData) => {
   }
   sidebar.id = 'sidebar';
   sidebar.innerHTML = `
-    <div class="container">
+    <div id="sidebar-content-container" class="container">
       <div class="sidebar-header">
         <h2 id = "sidebar-title">${facilityProps.FACILITY_APPROVED}</h2>
         <button id="close-sidebar" type="button" class="btn-close btn-close-white btn-lg" aria-label="Close"></button>    
@@ -537,14 +537,14 @@ const displaySidebar = (facilityProps, summaryData) => {
       <hr>
       
       <div class="row sidebar-top-row">
-        <div class="col-6 text-center">
+        <div id="average-days" class="col-6 text-center">
           <h3 class="sidebar-top-labels">Average duration of separation</h3>
           <h1 class="text-center sidebar-top-values">${Math.round(
             summaryData.Duration
           )}<label>days</label></h1>
           
         </div>
-        <div class="col-6 text-center">
+        <div id="reunification-rate" class="col-6 text-center">
           <h3 class="sidebar-top-labels">Reunification rate</h3>
           <h1 class="text-center sidebar-top-values">${Math.round(
             summaryData.discharge_rate * 100
@@ -553,7 +553,7 @@ const displaySidebar = (facilityProps, summaryData) => {
       </div>
       <div id="arc-diagram"></div>
       
-      <div class="sidebar-summary-container">
+      <div id="sidebar-summary-container" class="sidebar-summary-container">
         <h3 class="sidebar-summary-main" style="text-align: center" id="summary-text-${dashify(
           facilityProps.FACILITY_APPROVED
         )}">Waiting for data...</h3>

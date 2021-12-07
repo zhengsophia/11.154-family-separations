@@ -308,9 +308,82 @@ new ScrollMagic.Scene({
   // .addIndicators({name: "2 (duration: 0)"}) // add indicators (requires plugin)
   .addTo(controller);
 
+const showCayugaSidebar = () => {
+  if (document.getElementById('sidebar')) {
+    return;
+  }
+
+  let facilityProps = {
+    Duration: '76.9144385026738',
+    FACILITY_APPROVED: 'Cayuga Centers',
+    FIELD1: 27,
+    count: 374,
+    discharge_rate: '0.9037433155080213',
+    status: 'average',
+  };
+  let summaryData = {
+    Duration: 76.9144385026738,
+    FACILITY_APPROVED: 'Cayuga Centers',
+    count: 374,
+    discharge_rate: 0.9064171122994652,
+    lat: 40.8088,
+    lon: -73.9307,
+  };
+  displaySidebar(facilityProps, summaryData);
+};
+
 // Scene 2, stay at Cayuga, show sidebar
 new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-2' })
-  .setClassToggle('#cayuga-demo', 'active')
+  // .setClassToggle('#cayuga-demo', 'active')
+  .on('enter', (event) => {
+    showCayugaSidebar();
+
+    d3.select('#close-sidebar').style('display', 'none');
+    d3.select('#average-days').style('display', 'none');
+    d3.select('#reunification-rate').style('display', 'none');
+    d3.select('#arc-diagram').style('display', 'none');
+    d3.select('#sidebar-summary-container').style('display', 'none');
+
+    const sidebarContent = d3.select('#sidebar-content-container');
+    sidebarContent
+      .append('img')
+      .attr('src', 'images/cayugacenters.jpg')
+      .attr('id', 'cayuga-demo-image')
+      .style('width', '100%');
+  })
+  .addTo(controller);
+
+// Scene 3, remove the image and show the average duration
+new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-3' })
+  .on('enter', (event) => {
+    d3.select('#cayuga-demo-image').style('display', 'none');
+    d3.select('#average-days').style('display', '');
+  })
+  .on('leave', (event) => {
+    d3.select('#cayuga-demo-image').style('display', '');
+    d3.select('#average-days').style('display', 'none');
+  })
+  .addTo(controller);
+
+// Scene 4, show the reunification rate
+new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-4' })
+  .on('enter', (event) => {
+    d3.select('#reunification-rate').style('display', '');
+  })
+  .on('leave', (enter) => {
+    d3.select('#reunification-rate').style('display', 'none');
+  })
+  .addTo(controller);
+
+// Scene 5, show the arc diagram
+new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-5' })
+  .on('enter', (event) => {
+    showCayugaSidebar();
+    d3.select('#arc-diagram').style('display', '');
+  })
+  .on('leave', (enter) => {
+    d3.select('#arc-diagram').style('display', 'none');
+  })
   .addTo(controller);
 
 new ScrollMagic.Scene({ triggerElement: '#last-thing' })
@@ -327,6 +400,11 @@ new ScrollMagic.Scene({ triggerElement: '#last-thing' })
   .on('enter', (event) => {
     console.log('yo, entered:)');
     d3.select('#cayuga-demo').attr('class', 'send-to-back');
+    const mapElement = document.getElementById('map');
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      mapElement.removeChild(sidebar);
+    }
   })
   .on('leave', (event) => {
     d3.select('#cayuga-demo').attr('class', 'send-to-front');
