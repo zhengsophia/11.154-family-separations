@@ -1,6 +1,10 @@
 // bubbleChart creation function; instantiate new bubble chart given a DOM element to display it in and a dataset to visualise
 function bubbleChart() {
+<<<<<<< Updated upstream
     const width = 1200;
+=======
+    const width = 1000;
+>>>>>>> Stashed changes
     const height = 500;
   
     // location to centre the bubbles
