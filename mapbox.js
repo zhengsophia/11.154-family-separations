@@ -475,25 +475,11 @@ map.on('load', function () {
   ]);
 
   const layers = [
-    '0-10',
-    '10-20',
-    '20-50',
-    '50-100',
-    '100-200',
-    '200-500',
-    '500-1000',
-    '1000+',
+    'High Separation (~85+ days)',
+    'Average Separation (~50-95 days)',
+    'Low Separation (~0-50 days) ',
   ];
-  const colors = [
-    '#FFEDA0',
-    '#FED976',
-    '#FEB24C',
-    '#FD8D3C',
-    '#FC4E2A',
-    '#E31A1C',
-    '#BD0026',
-    '#800026',
-  ];
+  const colors = ['#C70039', '#ff8080', '#F87C09'];
 
   // create legend
   const legend = document.getElementById('legend');
@@ -506,7 +492,7 @@ map.on('load', function () {
     key.style.backgroundColor = color;
 
     const value = document.createElement('span');
-    value.innerHTML = `${layer}`;
+    value.innerHTML = ` <p id = "legend-text">${layer}</p>`;
     item.appendChild(key);
     item.appendChild(value);
     legend.appendChild(item);
@@ -540,7 +526,7 @@ const displaySidebar = (facilityProps, summaryData) => {
   sidebar.innerHTML = `
     <div class="container">
       <div class="sidebar-header">
-        <h2>${facilityProps.FACILITY_APPROVED}</h2>
+        <h2 id = "sidebar-title">${facilityProps.FACILITY_APPROVED}</h2>
         <button id="close-sidebar" type="button" class="btn-close btn-close-white btn-lg" aria-label="Close"></button>    
       </div>
       <hr>
@@ -662,41 +648,3 @@ var nav = new mapboxgl.NavigationControl({
 });
 
 map.addControl(nav, 'top-left');
-
-const layers = [
-  '0-10',
-  '10-20',
-  '20-50',
-  '50-100',
-  '100-200',
-  '200-500',
-  '500-1000',
-  '1000+',
-];
-const colors = [
-  '#FFEDA0',
-  '#FED976',
-  '#FEB24C',
-  '#FD8D3C',
-  '#FC4E2A',
-  '#E31A1C',
-  '#BD0026',
-  '#800026',
-];
-
-// create legend
-const legend = document.getElementById('legend');
-
-layers.forEach((layer, i) => {
-  const color = colors[i];
-  const item = document.createElement('div');
-  const key = document.createElement('span');
-  key.className = 'legend-key';
-  key.style.backgroundColor = color;
-
-  const value = document.createElement('span');
-  value.innerHTML = `${layer}`;
-  item.appendChild(key);
-  item.appendChild(value);
-  legend.appendChild(item);
-});

@@ -16,7 +16,7 @@ new ScrollMagic.Scene({
 // Activate Caption
 new ScrollMagic.Scene({
   triggerElement: '#spacer2',
-  triggerHook: 'onEnter',
+  triggerHook: 'onCenter',
 })
   .setClassToggle('#bubble_caption', 'active')
   .addTo(controller);

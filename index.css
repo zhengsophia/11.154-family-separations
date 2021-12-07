@@ -421,16 +421,48 @@ hr {
   padding: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   line-height: 18px;
-  height: 150px;
   margin-bottom: 40px;
-  width: 100px;
+  width: 275px;
+  height: 100px;
+  opacity: 0.8;
+  z-index: 1;
 }
+
+#legend-text {
+  display: inline-block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+  color: black;
+  line-height: 1px;
+}
+
 .legend-key {
   display: inline-block;
   border-radius: 20%;
   width: 10px;
   height: 10px;
   margin-right: 5px;
+}
+
+#bubble_caption {
+  font-size: 30px;
+  font-weight: 100;
+  line-height: 1.3;
+  text-align: left;
+  color: #eeeeee;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+}
+
+.image_caption {
+  font-style: italic;
+  font-size: 15px;
+  font-weight: 20;
+  line-height: 1.3;
+  text-align: left;
+  color: #eeeeee;
+  font-family: 'Times New Roman', Times, serif;
+  margin-top: 20px;
 }
 
 #bubble_caption {
