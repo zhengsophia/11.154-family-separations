@@ -58,6 +58,13 @@ new ScrollMagic.Scene({
   .setClassToggle('#img1', 'active')
   .addTo(controller);
 
+new ScrollMagic.Scene({ 
+  triggerElement: '#content-1', 
+  triggerHook: 'onEnter',
+})
+  .setClassToggle('#image_caption1', 'active')
+  .addTo(controller);
+
 
 // Deactivate First Body of Text + Image
 new ScrollMagic.Scene({ 
@@ -88,6 +95,16 @@ new ScrollMagic.Scene({
 .setClassToggle('#img1', 'deactive')
 .addTo(controller);
 
+new ScrollMagic.Scene({ 
+  triggerElement: '#spacer4',
+  triggerHook: 'onCenter'
+})
+.setClassToggle('#image_caption1', 'deactive')
+.addTo(controller);
+
+
+
+
 
 // Activate Second Body of Text + Image
 new ScrollMagic.Scene({ 
@@ -109,6 +126,13 @@ new ScrollMagic.Scene({
   triggerHook: 'onEnter',
 })
   .setClassToggle('#img2', 'active')
+  .addTo(controller);
+
+new ScrollMagic.Scene({ 
+  triggerElement: '#content-2', 
+  triggerHook: 'onEnter',
+})
+  .setClassToggle('#image_caption2', 'active')
   .addTo(controller);
 
 // Deactivate Second Body of Text + Image
@@ -133,6 +157,13 @@ new ScrollMagic.Scene({
 .setClassToggle('#img2', 'deactive')
 .addTo(controller);
 
+new ScrollMagic.Scene({ 
+  triggerElement: '#spacer5',
+  triggerHook: 'onCenter'
+})
+.setClassToggle('#image_caption2', 'deactive')
+.addTo(controller);
+
 
 // Activate Third Body of Text + Image
 new ScrollMagic.Scene({ 
@@ -154,6 +185,13 @@ new ScrollMagic.Scene({
   triggerHook: 'onEnter',
 })
   .setClassToggle('#img3', 'active')
+  .addTo(controller);
+
+new ScrollMagic.Scene({ 
+  triggerElement: '#content-3', 
+  triggerHook: 'onEnter',
+})
+  .setClassToggle('#image_caption3', 'active')
   .addTo(controller);
 
 
@@ -180,11 +218,46 @@ new ScrollMagic.Scene({
   .setClassToggle('#img3', 'deactive')
   .addTo(controller);
 
+  new ScrollMagic.Scene({ 
+    triggerElement: '#spacer6',
+    triggerHook: 'onCenter'
+  })
+  .setClassToggle('#image_caption3', 'deactive')
+  .addTo(controller);
+
+// Activate Fourth Image
+
+new ScrollMagic.Scene({ 
+  triggerElement: '#img4', 
+  triggerHook: 'onEnter',
+})
+  .setClassToggle('#img4', 'active')
+  .addTo(controller);
+
+new ScrollMagic.Scene({ 
+  triggerElement: '#img4', 
+  triggerHook: 'onEnter',
+})
+  .setClassToggle('#image_caption4', 'active')
+  .addTo(controller);
 
 
 
+// Deactivate Fourth Image
 
+new ScrollMagic.Scene({ 
+  triggerElement: '#spacer7',
+  triggerHook: 'onCenter'
+})
+.setClassToggle('#img4', 'deactive')
+.addTo(controller);
 
+new ScrollMagic.Scene({ 
+  triggerElement: '#spacer7',
+  triggerHook: 'onCenter'
+})
+.setClassToggle('#image_caption4', 'deactive')
+.addTo(controller);
 
 
 
