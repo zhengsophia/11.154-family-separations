@@ -38,6 +38,9 @@ new ScrollMagic.Scene({
   triggerHook: 'onCenter',
 })
   .setClassToggle('#title-image', 'disabled')
+  .on('enter', () => {
+    show();
+  })
   .addTo(controller);
 
 
