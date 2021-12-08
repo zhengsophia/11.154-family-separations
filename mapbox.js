@@ -612,8 +612,8 @@ map.on('click', 'facilities', function (e) {
       summary_data = data.find(
         (row) => row.FACILITY_APPROVED === facilityProps.FACILITY_APPROVED
       );
-      console.log(facilityProps);
-      console.log(summary_data);
+      // console.log(facilityProps);
+      // console.log(summary_data);
       displaySidebar(facilityProps, summary_data);
     });
   } else {
@@ -648,7 +648,7 @@ map.on('click', 'facilities', function (e) {
 
 map.scrollZoom.disable();
 
-var nav = new mapboxgl.NavigationControl({
+const nav = new mapboxgl.NavigationControl({
   showCompass: false,
   showZoom: true,
 });
