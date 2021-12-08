@@ -132,9 +132,16 @@ function bubbleChart() {
     myBubbleChart('#vis', data);
   }
   
+showed = false;
   // load data
+const show = () => {
+  if (!showed) {
+  d3.csv('forced_data.csv').then(display);
+  showed = true;
+}
 
-d3.csv('forced_data.csv').then(display);
+}
+
 
 // create a scroll magic controller
 var controller = new ScrollMagic.Controller();

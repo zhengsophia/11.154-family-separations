@@ -38,6 +38,9 @@ new ScrollMagic.Scene({
   triggerHook: 'onCenter',
 })
   .setClassToggle('#title-image', 'disabled')
+  .on('enter', () => {
+    show();
+  })
   .addTo(controller);
 
 
@@ -339,6 +342,7 @@ const position0 = {
   center: [-95.7129, 36.0902],
   zoom: 3.5,
   pitch: 0,
+  bearing: 0,
   speed: 0.75,
   curve: 1.5,
 };
@@ -347,6 +351,7 @@ const position0 = {
 const position1 = {
   center: [-73.9307, 40.8088],
   zoom: 13,
+  bearing: 15,
   pitch: 45,
   speed: 0.75,
   curve: 1.5,
@@ -367,6 +372,7 @@ const position3 = {
   offset: [-500, 0],
   pitch: 0,
   zoom: 9,
+  bearing: 0,
   speed: 0.75,
   curve: 1.5,
 };
@@ -506,7 +512,7 @@ new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-6' })
     removeSidebar();
   })
   .on('leave', (event) => {
-    // displaySidebar();
+    showCayugaSidebar();
   })
   .addTo(controller);
 
@@ -517,7 +523,13 @@ new ScrollMagic.Scene({ triggerElement: '#last-thing' })
   })
   .on('leave', (event) => {
     removeSidebar();
+    try {
+
+    
     map.removeControl(nav);
+  } catch(err) {
+    console.log('leaving')
+  }
   })
   .addTo(controller);
 
