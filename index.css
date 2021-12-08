@@ -333,6 +333,23 @@ hr {
   padding: 5%;
 }
 
+.big-number {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.big-number h1 {
+  font-size: 150pt;
+  color: var(--yellow);
+}
+
+.big-number label {
+  font-size: 18pt;
+  font-family: 'Times New Roman', Times, serif;
+  color: var(--light-gray);
+}
+
 .scrollytelling-with-sidebar {
   width: 40%;
   padding: 2%;

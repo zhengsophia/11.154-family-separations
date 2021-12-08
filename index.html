@@ -55,7 +55,7 @@
           Parent criminal history (<span style="color: #900C3E">8.4</span>), parent immigration history (<span style="color: #a63232"">0.9</span>), 
           a combination of both (<span style="color: #E52525">0.6</span>), parent gang membership (<span style="color: #F87C09">1.2</span>), 
           parent health issues (<span style="color: #FFC300">1.2</span>) and other reasons (<span style="color: #ff5765">1.2</span>) were
-          cited as the reasons for only 5% of the family separations. 
+          cited as the reasons for only 13% of the family separations. 
         </p>
         <div id="vis"></div>
         <script src="./forcedbubble.js"></script>
@@ -84,7 +84,7 @@
             While family separations at the border were taking place long before
             the implementation of the Zero Tolerance Policy, they grew greatly
             during 2018 and the years following. This is a consequence of the
-            Trump administration passing a Zero Tolerance Policy with regards to
+            Trump administration passing a <b>Zero Tolerance Policy</b> with regards to
             immigration from May 2018 to June 2018 after its original proposal
             in April 2018. As a result, migrants seeking entry at the border
             were arrested for any minor infraction at the discretion of border
@@ -92,8 +92,8 @@
             asylum seekers, which is a legal pathway to entering the country,
             and companions who were minors. This lead to widespread prosecution
             and family separations, particularly impacting Central American
-            migrants from the Northern Triangle countries of Guatemala,
-            Honduras, and El Salvador. Throughout this time, there was a large
+            migrants from the <b>Northern Triangle</b> countries of <b>Guatemala,
+            Honduras, and El Salvador</b>. Throughout this time, there was a large
             blame game over the mistreatment of migrants trying to enter the
             country, although the separations were overwhelmingly a direct
             consequence of the policy.
@@ -111,9 +111,10 @@
              
       </div>
 
-      <div class="spacer" id="spacer4"></div>
+      <div class="spacer big-number" id="spacer4"><h1>67.8</h1><label>Average
+      number of days a child was separated</label></div>
 
-      <div id="content-2" class="row">
+      <div id="content-2" class="row d-flex align-items-center">
         <div class="col-7">
           <h3 id="heading-2" class="scrolly-text">
             What did family separations entail?
@@ -147,7 +148,10 @@
         </div>
       </div>
 
-      <div class="spacer" id="spacer5"></div>
+      <div class="spacer big-number" id="spacer5">
+        <h1>88.5%</h1><label>Average
+          reunification rate across facilities</label>
+      </div>
 
       <div id="content-3" class="row">
         <div class="col-7">
@@ -174,22 +178,21 @@
           <p id="text3" class="boxed scrolly-text">
             There are some key statistics that we chose to focus on within the
             dataset by displaying in our dashboard for each facility including the 
-            average duration of separation and reunification rate. 
+            average duration of separation and reunification rate.
+            <!--  -->
             <br /><br />
-            The average duration of separation across all facilities was <span style="color: #900C3E">67.8</span> days.
+            The average duration of separation across all facilities was <span style="color: #ffc300">67.8</span> days.
             <br /><br />
-            The average reunification rate across all facilities was <span style="color: #900C3E">88.5%</span> days.
+            The average reunification rate across all facilities was <span style="color: #ffc300">88.5%</span> days.
             <br /><br />
-            <!-- do we want to include which specific facilities were unabled to be plotted? -->
-          </p>
-          <p id="text3" class="boxed scrolly-text">
-            ** The Homestead Shelter, Heartland Alliance's Casa Guadalupe
-            shelter, Heartland Alliance's CHAP, BCFS Extended Care, and Bethany
-            Christian Services Shelter could not be georeferenced for our
-            visualization.
 
-            <!-- do we want to include which specific facilities were unabled to be plotted? -->
+            Although the high reunification rate seems promising, being
+            separated from your families and sent to an unknown location for
+            more than 2 months can be a challenging and potentially traumatic
+            experience.
+            
           </p>
+
         
         </div>
 
@@ -224,10 +227,16 @@
               
 
       </div>
-              
-    
-      <div id="spacer6" class="spacer"></div>
+      <div id="spacer6" class="spacer">
+      </div>
     </main>
+    <p style="margin-left: 1%; color: gray">
+      ** The Homestead Shelter, Heartland Alliance's Casa Guadalupe
+      shelter, Heartland Alliance's CHAP, BCFS Extended Care, and Bethany
+      Christian Services Shelter could not be georeferenced for our
+      visualization.
+
+    </p>
     <div id="arc-tooltip" class="hidden">
       <span id="value"></span>
     </div>
