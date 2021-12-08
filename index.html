@@ -8,6 +8,8 @@
       href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css"
       rel="stylesheet"
     />
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
     <title>Family Separations</title>
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500"
@@ -33,6 +35,7 @@
             Just how large was the magnitude of Central American family
             separations under the Zero Tolerance Policy?
           </h1>
+      
           <div id="spacer1" class="spacer"></div>
         </div>
       </header>
@@ -42,13 +45,13 @@
 
       <div>
 
-        <p class="scrolly-text" id="bubble_caption">
+        <p class="boxed scrolly-text" id="bubble_caption">
           Between Jan. 2018 and March 2019, a record of 3170 children were separated from their parents at the US-Mexican border. 
         </p>
 
         <br>
 
-        <p class="scrolly-text" id="bubble_caption"> 
+        <p class="boxed scrolly-text" id="bubble_caption"> 
           Parent criminal history (<span style="color: #900C3E">8.4</span>), parent immigration history (<span style="color: #a63232"">0.9</span>), 
           a combination of both (<span style="color: #E52525">0.6</span>), parent gang membership (<span style="color: #F87C09">1.2</span>), 
           parent health issues (<span style="color: #FFC300">1.2</span>) and other reasons (<span style="color: #ff5765">1.2</span>) were
@@ -57,7 +60,7 @@
         <div id="vis"></div>
         <script src="./forcedbubble.js"></script>
 
-        <p class="scrolly-text" id="bubble_caption">
+        <p class="boxed scrolly-text" id="bubble_caption">
           The 
           <span style="color: #ff8080"> Zero Tolerance Policy </span> was cited as the reason for 
           <span style="color: #ff8080"> 87% </span>
@@ -77,7 +80,7 @@
             What is the Zero Tolerance Policy?
           </h3>
 
-          <p id="text1" class="scrolly-text">
+          <p id="text1" class="boxed scrolly-text">
             While family separations at the border were taking place long before
             the implementation of the Zero Tolerance Policy, they grew greatly
             during 2018 and the years following. This is a consequence of the
@@ -99,7 +102,7 @@
 
         <div class="col-5">
           <img id="img1" class="scrolly-image" src="images/tweet.png" />
-          <p id="image_caption1" class="scrolly-text image_caption">
+          <p id="image_caption1" class="boxed scrolly-text image_caption">
             A tweet posted by former President Trump in May 2018 criticizing the 
             Democrats for their actions in separating families at the border, ironic
             to his proposed policy.
@@ -115,7 +118,7 @@
           <h3 id="heading-2" class="scrolly-text">
             What did family separations entail?
           </h3>
-          <p id="text2" class="scrolly-text">
+          <p id="text2" class="boxed scrolly-text">
             While family separations at the border were taking place long before
             the implementation of the Zero Tolerance Policy, they grew greatly
             during 2018 and the years following. This is a consequence of the
@@ -137,7 +140,7 @@
 
         <div class="col-5">
           <img id="img2" class="scrolly-image" src="images/website_img1.jpg" />
-          <p id="image_caption2" class="scrolly-text image_caption">
+          <p id="image_caption2" class="boxed scrolly-text image_caption">
             Migrants overcrowding in a Border Patrol station in McAllen, Tex.,
             on June 10. Image courtesy of Getty Images
           </p>
@@ -152,7 +155,7 @@
             When this all becomes public knowledge...
           </h3>
 
-          <p id="text3" class="scrolly-text">
+          <p id="text3" class="boxed scrolly-text">
             In 2018, the American Immigration Council filed a request for
             information on child separations through the Freedom of Information
             Act. As a result, they were able to obtain data sourced from ICE
@@ -160,7 +163,7 @@
             reasons for separation for shelters all across the country.
           </p>
 
-          <p id="text3" class="scrolly-text">
+          <p id="text3" class="boxed scrolly-text">
             By analyzing this data, our group hopes to identify the lasting
             impacts of the policy even though it was only officially in place
             for a few months. Additionally, we want to bring more awareness to
@@ -168,7 +171,7 @@
           </p>
 
           <h3 id="heading-3" class="scrolly-text">Interpreting the data</h3>
-          <p id="text3" class="scrolly-text">
+          <p id="text3" class="boxed scrolly-text">
             There are some key statistics that we chose to focus on within the
             dataset by displaying in our dashboard for each facility including the 
             average duration of separation and reunification rate. 
@@ -179,7 +182,7 @@
             <br /><br />
             <!-- do we want to include which specific facilities were unabled to be plotted? -->
           </p>
-          <p id="text3" class="scrolly-text">
+          <p id="text3" class="boxed scrolly-text">
             ** The Homestead Shelter, Heartland Alliance's Casa Guadalupe
             shelter, Heartland Alliance's CHAP, BCFS Extended Care, and Bethany
             Christian Services Shelter could not be georeferenced for our
@@ -191,8 +194,8 @@
         </div>
 
         <div class="col-5">
-          <img id="img3" class="scrolly-image" src="images/website_img3.jpg" />
-          <p id="image_caption3" class="scrolly-text image_caption">
+          <img id="img3" class="boxed scrolly-image" src="images/website_img3.jpg" />
+          <p id="image_caption3" class="boxed scrolly-text image_caption">
             Migrants fleeing tear gas fired by C.B.P. officers near San Diego on
             Nov. 25, 2018. Courtesy of Kim Kyung-Hoon from Reuters
           </p>
@@ -201,7 +204,7 @@
         <div class="spacer_add" id="spacer5"></div>
         <h3 id ="heading-4" class="scrolly-text"> Limitations and Nuances</h3>
             
-          <p id="text4" class="scrolly-text">In this piece, we attempt to compare and contrast statistics of different facilities in an effort to judge the quality 
+          <p id="text4" class="boxed scrolly-text">In this piece, we attempt to compare and contrast statistics of different facilities in an effort to judge the quality 
             of each. We quickly realized that making these conclusions was difficult 
             and, in some cases, problematic. Some facilities present themselves as non-profit organizations 
             providing children with a place to stay when politics interfered in their lives. Some are not. Making 

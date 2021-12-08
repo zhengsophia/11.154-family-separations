@@ -71,6 +71,15 @@ body {
   font-size: 18px;
   background-color: #161616;
   overflow-x: hidden;
+  background-image: url("./map-modified.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 0 0;
+}
+
+.boxed{
+  background-color:black;
 }
 
 hr {
@@ -518,3 +527,4 @@ hr {
   font-family: 'Times New Roman', Times, serif;
   margin-top: 20px;
 }
+
