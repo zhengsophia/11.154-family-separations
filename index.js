@@ -1,16 +1,27 @@
 var controller = new ScrollMagic.Controller();
 
 // Activate title
-new ScrollMagic.Scene({ triggerElement: '#main-title' })
+new ScrollMagic.Scene({ triggerElement: '#main-title', triggerHook: 'onEnter' })
   .setClassToggle('#main-title', 'active')
+  .addTo(controller);
+
+// Activate image
+new ScrollMagic.Scene({ triggerElement: '#main-title', triggerHook: 'onEnter' })
+  .setClassToggle('#title-image', 'active')
   .addTo(controller);
 
 // Deactivate title
 new ScrollMagic.Scene({
   triggerElement: '#spacer2',
-  triggerHook: 'onEnter',
 })
   .setClassToggle('#main-title', 'deactive')
+  .addTo(controller);
+  
+// Deactivate image
+new ScrollMagic.Scene({
+  triggerElement: '#spacer2',
+})
+  .setClassToggle('#title-image', 'deactive')
   .addTo(controller);
 
 // Activate Caption
@@ -20,6 +31,15 @@ new ScrollMagic.Scene({
 })
   .setClassToggle('#bubble_caption', 'active')
   .addTo(controller);
+
+// Disable image
+new ScrollMagic.Scene({
+  triggerElement: '#bubble_caption',
+  triggerHook: 'onCenter',
+})
+  .setClassToggle('#title-image', 'disabled')
+  .addTo(controller);
+
 
 // Deactivate Caption
 new ScrollMagic.Scene({
