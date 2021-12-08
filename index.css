@@ -321,6 +321,7 @@ hr {
 
 #img5 {
   width: 100%;
+  padding: 5%;
 }
 
 .scrollytelling-with-sidebar {
@@ -336,10 +337,21 @@ hr {
   filter: blur(5px);
 }
 
+#scrollmap-content-0 {
+  display: flex;
+  justify-content: center;
+  padding: 2%;
+}
+
+#scrollmap-content-1 {
+  color: var(--light-gray) !important;
+}
+
 #scrollmap-content-2 {
   font-family: 'Times New Roman', Times, serif;
   font-size: xx-large;
   color: var(--off-white);
+  padding: 5%;
 }
 
 .author-label {

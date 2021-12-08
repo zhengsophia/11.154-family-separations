@@ -363,76 +363,71 @@ const removeSidebar = () => {
 new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-2' })
   // .setClassToggle('#cayuga-demo', 'active')
   .on('enter', (event) => {
-    showCayugaSidebar();
+    
 
-    d3.select('#close-sidebar').style('display', 'none');
-    d3.select('#average-days').style('display', 'none');
-    d3.select('#reunification-rate').style('display', 'none');
-    d3.select('#arc-diagram').style('display', 'none');
-    d3.select('#sidebar-summary-container').style('display', 'none');
-
-    const sidebarContent = d3.select('#sidebar-content-container');
-    sidebarContent
-      .append('img')
-      .attr('src', 'images/cayugacenters.jpg')
-      .attr('id', 'cayuga-demo-image')
-      .style('width', '100%');
+    // const sidebarContent = d3.select('#sidebar-content-container');
+    // sidebarContent
+    //   .append('img')
+    //   .attr('src', 'images/cayugacenters.jpg')
+    //   .attr('id', 'cayuga-demo-image')
+    //   .style('width', '100%');
   })
   .addTo(controller);
 
 // Scene 3, remove the image and show the average duration
 new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-3' })
   .on('enter', (event) => {
-    d3.select('#cayuga-demo-image').style('display', 'none');
-    d3.select('#average-days').style('display', '');
+    showCayugaSidebar();
+
+    d3.select('#close-sidebar').style('display', 'none')
+    d3.select('#reunification-rate').style('opacity', 0).style('transition', 'opacity 0.8s').style(
+      '-webkit-transition', 'opacity 0.8s');
+    d3.select('#arc-diagram').style('opacity', 0).style('transition', 'opacity 0.8s').style(
+      '-webkit-transition', 'opacity 0.8s');
+    d3.select('#sidebar-summary-container').style('opacity', 0).style('transition', 'opacity 0.8s').style(
+      '-webkit-transition', 'opacity 0.8s');
+    // d3.select('#cayuga-demo-image').style('display', 'none');
   })
   .on('leave', (event) => {
-    d3.select('#cayuga-demo-image').style('display', '');
+    // d3.select('#cayuga-demo-image').style('display', '');
+
     d3.select('#average-days').style('display', 'none');
+    removeSidebar();
   })
   .addTo(controller);
 
 // Scene 4, show the reunification rate
 new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-4' })
   .on('enter', (event) => {
-    d3.select('#reunification-rate').style('display', '');
+    d3.select('#reunification-rate').style('opacity', 1);
   })
   .on('leave', (enter) => {
-    d3.select('#reunification-rate').style('display', 'none');
+    d3.select('#reunification-rate').style('opacity', 0);
   })
   .addTo(controller);
 
 // Scene 5, show the arc diagram
 new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-5' })
   .on('enter', (event) => {
-    d3.select('#arc-diagram').style('display', '');
+    d3.select('#arc-diagram').style('opacity', 1);
   })
   .on('leave', (enter) => {
-    d3.select('#arc-diagram').style('display', 'none');
+    d3.select('#arc-diagram').style('opacity', 0);
   })
   .addTo(controller);
 
 // Scene 6, show the final summary text
 new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-6' })
   .on('enter', (event) => {
-    d3.select('#sidebar-summary-container').style('display', '');
+    d3.select('#sidebar-summary-container').style('opacity', 1);
   })
   .on('leave', (enter) => {
-    d3.select('#sidebar-summary-container').style('display', 'none');
+    d3.select('#sidebar-summary-container').style('opacity', 0);
   })
   .addTo(controller);
 
-new ScrollMagic.Scene({ triggerElement: '#last-thing' })
-  .setClassToggle('#map', 'send-to-front')
-  .on('enter', (event) => {
-    map.flyTo(position0);
-  })
-  .on('leave', (event) => {
-    map.flyTo(position1);
-  })
-  .addTo(controller);
-
-new ScrollMagic.Scene({ triggerElement: '#remove-the-sidebar' })
+  
+  new ScrollMagic.Scene({ triggerElement: '#remove-the-sidebar' })
   .on('enter', (event) => {
     removeSidebar();
   })
@@ -440,14 +435,16 @@ new ScrollMagic.Scene({ triggerElement: '#remove-the-sidebar' })
     // displaySidebar();
   })
   .addTo(controller);
-
-new ScrollMagic.Scene({ triggerElement: '#last-thing' })
-  .on('enter', (event) => {
-    console.log('yo, entered:)');
-    map.addControl(nav, 'top-left');
-  })
-  .on('leave', (event) => {
-    removeSidebar();
-    map.removeControl(nav);
-  })
-  .addTo(controller);
+  
+  new ScrollMagic.Scene({ triggerElement: '#last-thing' })
+    .setClassToggle('#map', 'send-to-front')
+    .on('enter', (event) => {
+      map.addControl(nav, 'top-left');
+      map.flyTo(position0);
+    })
+    .on('leave', (event) => {
+      map.flyTo(position1);
+      map.removeControl(nav);
+      removeSidebar();
+    })
+    .addTo(controller);
