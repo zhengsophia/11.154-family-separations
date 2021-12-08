@@ -285,18 +285,39 @@ new ScrollMagic.Scene({ triggerElement: '#map', triggerHook: 'onEnter' })
   .setClassToggle('#map-title', 'active')
   .addTo(controller);
 
+// Map center
 const position0 = {
   center: [-95.7129, 36.0902],
   zoom: 3.5,
+  pitch: 0,
   speed: 0.75,
   curve: 1.5,
 };
 
-// Cayuga
+// Cayuga, centered, very zoomed, and pitched
 const position1 = {
   center: [-73.9307, 40.8088],
+  zoom: 13,
+  pitch: 45,
+  speed: 0.75,
+  curve: 1.5,
+};
+
+// Cayuga, offset a little
+const position2 = {
+  center: [-73.9307, 40.8088],
   offset: [-500, 0],
-  zoom: 10,
+  zoom: 12,
+  pitch: 45,
+  speed: 0.75,
+  curve: 1.5,
+};
+
+const position3 = {
+  center: [-73.9307, 40.8088],
+  offset: [-500, 0],
+  pitch: 0,
+  zoom: 9,
   speed: 0.75,
   curve: 1.5,
 };
@@ -363,7 +384,7 @@ const removeSidebar = () => {
 new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-2' })
   // .setClassToggle('#cayuga-demo', 'active')
   .on('enter', (event) => {
-    
+    map.flyTo(position2)
 
     // const sidebarContent = d3.select('#sidebar-content-container');
     // sidebarContent
@@ -372,11 +393,15 @@ new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-2' })
     //   .attr('id', 'cayuga-demo-image')
     //   .style('width', '100%');
   })
+  .on('leave', (event) => {
+    map.flyTo(position1)
+  })
   .addTo(controller);
 
-// Scene 3, remove the image and show the average duration
+// Scene 3, show the sidebar
 new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-3' })
   .on('enter', (event) => {
+    map.flyTo(position3)
     showCayugaSidebar();
 
     d3.select('#close-sidebar').style('display', 'none')
@@ -390,7 +415,7 @@ new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-3' })
   })
   .on('leave', (event) => {
     // d3.select('#cayuga-demo-image').style('display', '');
-
+    map.flyTo(position2)
     d3.select('#average-days').style('display', 'none');
     removeSidebar();
   })
@@ -443,7 +468,7 @@ new ScrollMagic.Scene({ triggerElement: '#scrollmap-content-6' })
       map.flyTo(position0);
     })
     .on('leave', (event) => {
-      map.flyTo(position1);
+      map.flyTo(position3);
       map.removeControl(nav);
       removeSidebar();
     })
