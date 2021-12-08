@@ -354,6 +354,26 @@ hr {
   padding: 5%;
 }
 
+#scrollmap-content-3 b {
+  font-size: larger;
+  color: var(--secondary);
+}
+
+#scrollmap-content-4 b {
+  font-size: x-large;
+  color: var(--secondary);
+}
+
+#scrollmap-content-5 b {
+  font-size: large;
+  color: var(--orange);
+}
+
+#scrollmap-content-6 b {
+  font-size: x-large;
+  color: var(--yellow);
+}
+
 .author-label {
   font-size: large;
   color: var(--light-gray);
