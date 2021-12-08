@@ -136,6 +136,24 @@ function bubbleChart() {
 
 d3.csv('forced_data.csv').then(display);
 
+// create a scroll magic controller
+var controller = new ScrollMagic.Controller();
+
+// create a scene
+// new ScrollMagic.Scene({
+//     // the element to scroll inside
+//     triggerElement: '#vis',
+//     // how many pixels do we scroll
+//     duration: window.innerHeight * 2,
+//     // set trigger to top
+//     triggerHook: 'onCenter'
+//   })
+//   // pins the element for the the scene's duration
+//   // assign the scene to the controller
+//   .addTo(controller)
+//   // subscribe to progress events
+//   .on('progress', d3.csv('forced_data.csv').then(display));
+
 
 
 

@@ -234,6 +234,55 @@ new ScrollMagic.Scene({
   .setClassToggle('#image_caption4', 'active')
   .addTo(controller);
 
+// Activate Foourth Body of Text + Image
+new ScrollMagic.Scene({
+  triggerElement: '#spacer_add',
+  triggerHook: 'onEnter',
+})
+  .setClassToggle('#heading-4', 'active')
+  .addTo(controller);
+
+new ScrollMagic.Scene({
+  triggerElement: '#spacer_add',
+  triggerHook: 'onEnter',
+})
+  .setClassToggle('#text4', 'active')
+  .addTo(controller);
+
+
+// Deactivate Fourth Body of Text + Image
+
+new ScrollMagic.Scene({
+  triggerElement: '#spacer6',
+  triggerHook: 'onCenter',
+})
+  .setClassToggle('#heading-4', 'deactive')
+  .addTo(controller);
+
+new ScrollMagic.Scene({
+  triggerElement: '#spacer6',
+  triggerHook: 'onCenter',
+})
+  .setClassToggle('#text4', 'deactive')
+  .addTo(controller);
+
+// Activate Fourth Image
+
+new ScrollMagic.Scene({
+  triggerElement: '#img4',
+  triggerHook: 'onEnter',
+})
+  .setClassToggle('#img4', 'active')
+  .addTo(controller);
+
+new ScrollMagic.Scene({
+  triggerElement: '#img4',
+  triggerHook: 'onEnter',
+})
+  .setClassToggle('#image_caption4', 'active')
+  .addTo(controller);
+
+
 // Deactivate Fourth Image
 
 new ScrollMagic.Scene({
@@ -429,5 +478,29 @@ new ScrollMagic.Scene({ triggerElement: '#last-thing' })
   .on('leave', (event) => {
     removeSidebar();
     map.removeControl(nav);
+  })
+  .addTo(controller);
+
+
+// new ScrollMagic.Scene({
+//   triggerElement: '#vis_spacer',
+//   triggerHook: 'onCenter',
+//   })
+//     .setClassToggle('#vis', 'active')
+//     .addTo(controller);
+  
+// new ScrollMagic.Scene({
+//   triggerElement: '#vis_spacer',
+//   triggerHook: 'onCenter',
+// })
+//   .setClassToggle('#vis', 'deactive')
+//   .addTo(controller);
+
+new ScrollMagic.Scene({ triggerElement: '#spacer3' })
+  .on('enter', (event) => {
+    d3.select('.bubble').style('display', '');
+  })
+  .on('leave', (enter) => {
+    d3.select('.bubble').style('display', 'none');
   })
   .addTo(controller);
